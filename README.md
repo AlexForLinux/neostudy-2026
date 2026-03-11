@@ -1,2 +1,2 @@
-# neostudy-2026
-An educational project in a field of AI-Engineering: "AI-powered meal planning assistant based on available products"
+# Кулинарный AI-ассистент
+Кулинарный AI-ассисент, который подскажет, что и как приготовить из остатков продуктов с учетом доступной утвари
