@@ -3,4 +3,4 @@ AI-ассисент подбора рецептов на основе имеющ
 Поддержка на протяжении всего процесса: от планирования до непосредственного приготовления пищи.
 
 ### Артефакты:
-- mdbook: https://alexforlinux.github.io/neostudy-2026/description.html
+- mdbook: https://alexforlinux.github.io/neostudy-2026
