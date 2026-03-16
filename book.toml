@@ -1,0 +1,16 @@
+[book]
+authors = ["Aleksandr Ovchinnikov"]
+language = "en"
+src = "mdbook"
+title = "neostudy-2026"
+
+[build]
+build-dir = "book"
+create-missing = true
+
+[preprocessor.drawio]
+command = "mdbook-drawio"
+
+[output.html]
+additional-css = ["mdbook/_assets/custom.css"]
+additional-js = []

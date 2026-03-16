@@ -1,3 +1,9 @@
+# mdbook
+book
+
+_tools/mdbook-drawio/target/
+_tools/mdbook-drawio/Cargo.lock
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
