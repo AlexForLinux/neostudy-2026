@@ -14,7 +14,7 @@ class OllamaService:
             options = {
                 "temperature": data.temperature
             },
-            format = Recipe.model_json_schema()
+            # format = Recipe.model_json_schema()
         )
         return response
 

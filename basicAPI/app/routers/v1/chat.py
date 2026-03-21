@@ -13,7 +13,7 @@ def completions(
 ):
     try:
         response = ollama_service.ask_llm(completions)
-        response.message.content = json.loads(response.message.content) # возможно, лишнее
+        # response.message.content = json.loads(response.message.content) # возможно, лишнее
         return response
     
     except ResponseError as err:
