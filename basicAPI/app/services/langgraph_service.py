@@ -3,6 +3,7 @@ from app.schemas.graph_state import MysticState
 from app.schemas.intention import Intention
 from app.schemas.chat import ChatCompletions
 from .gpt_service import gpt_service
+from .prompt_service import prompt_service
 
 class LanggraphService:
     def __init__(self):
@@ -50,11 +51,17 @@ class LanggraphService:
         return {}
     
     def _select_prompt(self, state: MysticState) -> dict:
-        return {}
+        system_prompt = None
+
+        if (state["user_intention"] == Intention.RECIPE):
+            system_prompt = prompt_service.recipe_prompt
+            
+        return {"system_prompt": system_prompt}
     
     def _generate_answer(self, state: MysticState) -> dict:
-        return {
-            "message": gpt_service.ask_llm(state['user_query'])
-        }
+        chat = state['user_query']
+        chat.messages.insert(0, {"role": "system", "content": state["system_prompt"]})
+
+        return {"message": gpt_service.ask_llm(chat)}
     
 langgraph_service = LanggraphService()

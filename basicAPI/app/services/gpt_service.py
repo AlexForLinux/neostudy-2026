@@ -10,14 +10,14 @@ class GPTService:
             api_key=settings.api_key
         )
 
-    def ask_llm(self, data: ChatCompletions) -> str:
-        response = self.__client.chat.completions.create(
+    def ask_llm(self, data: ChatCompletions):
+        response = self.__client.chat.completions.parse(
             model = data.model,
             messages = data.messages,
-            temperature = data.temperature
-            # format = Recipe.model_json_schema()
+            temperature = data.temperature,
+            response_format=Recipe
         )
 
-        return response.choices[0].message.content
+        return response.choices[0].message.parsed
 
 gpt_service = GPTService()

@@ -1,6 +1,8 @@
 # mdbook
 book
 
+basicAPI/system_prompts
+
 _tools/mdbook-drawio/target/
 _tools/mdbook-drawio/Cargo.lock
 
