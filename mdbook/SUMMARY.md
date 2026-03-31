@@ -6,3 +6,6 @@
 3. [Подходы для оценки критериев](./evaluateLLMs/criterion_methods.md)
 4. [Итерации и анализ ошибок](./evaluateLLMs/error_analysis.md)
 5. [Выбор модели для AI-систем](./evaluateLLMs/llm_choice.md)
+
+# Prompt Enginnering (18.03 - 01.04)
+1. [Проектирование базового промпта](./promptEngineering/basicPrompt.md)
