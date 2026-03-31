@@ -9,3 +9,4 @@
 
 # Prompt Enginnering (18.03 - 01.04)
 1. [Проектирование базового промпта](./promptEngineering/basicPrompt.md)
+2. [Защита от атак](./promptEngineering/security.md)
