@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1757,6 +1757,68 @@
 </ul>
 </blockquote>
 <p>В дополнение к этому можно применить SGR (Schema-Guided Reasoning)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Введение-в-rag"><a class="header" href="#Введение-в-rag">Введение в RAG</a></h1>
+<h2 id="1-Используемые-данные"><a class="header" href="#1-Используемые-данные">1. Используемые данные</a></h2>
+<h3 id="11-Какие-данные"><a class="header" href="#11-Какие-данные">1.1. Какие данные</a></h3>
+<p>Система использует 2 корпуса данных: рецепты и советы</p>
+<ol>
+<li>Рецепты структурированы в виде JSON-документов с названием, описанием, перечнем ингредиентов, кухонной утвари, шагов приготовления и дополнительными советами.</li>
+<li>Советы также будут структурированны в виде JSON-документов с данными о категории совета и содержанием.</li>
+</ol>
+<h3 id="12-Объем-данных"><a class="header" href="#12-Объем-данных">1.2. Объем данных</a></h3>
+<p>Объем данных в данной системе может быть потенциально крупным, поскольку:</p>
+<ul>
+<li>Число рецептов на различных кулинарных порталах варьируется от 1 000 до 100 000 штук</li>
+</ul>
+<h3 id="13-Динамика-изменения"><a class="header" href="#13-Динамика-изменения">1.3. Динамика изменения</a></h3>
+<p>Сами рецепты и советы вряд ли будут подвергаться изменению. Основные изменения будут связаны с добавлением новых и удалением старых документов. Однако и эти добавления/удаления будут происходить не очень часто.</p>
+<h2 id="2-Стратегия-доступа-к-знаниям"><a class="header" href="#2-Стратегия-доступа-к-знаниям">2. Стратегия доступа к знаниям</a></h2>
+<h3 id="21-Доступ-к-рецептам"><a class="header" href="#21-Доступ-к-рецептам">2.1. Доступ к рецептам</a></h3>
+<p>Для работы с рецептами предусмотрим следующую стратегрию: </p>
+<ol>
+<li>Выберем характеристики, которые наиболее полно отражают тот или иной рецепт:</li>
+</ol>
+<ul>
+<li>Название</li>
+<li>Описание</li>
+<li>Ингредиенты</li>
+<li>Кухонная утварь</li>
+</ul>
+<ol start="2">
+<li>Агрегацию этих характеристик представим в виде эмбеддинга. Шаги и советы включать в эмбеддинг не будем, поскольку они составляют основную часть описания рецепта, но при этом несут меньше полезной информации, что может создавать лишний шум и снизить качество</li>
+<li>Для каждого рецепта выполним такое представление и сохраним результаты в базу знаний в виде пар соответствия вектор &lt;=&gt; рецепт</li>
+<li>При поступлении запроса пользователя, создаем его векторное представление</li>
+<li>Осуществляем поиск наиболее схожих векторов по нашему хранилищу</li>
+<li>Возвращаем исходные тексты рецептов, исходя из заданных соотвествий вектор &lt;=&gt; рецепт</li>
+<li>Отдаем эти тексты дальше по цепочке</li>
+</ol>
+<h3 id="22-Доступ-к-советам"><a class="header" href="#22-Доступ-к-советам">2.2. Доступ к советам</a></h3>
+<p>Работа с советами имеет аналогичную стуктуру:</p>
+<ol>
+<li>Представить совет с дополнительными характеристиками (например, категория) и представить вектором</li>
+<li>Задать соответствия вектор &lt;=&gt; совет</li>
+<li>Осуществалять сравнение вектора представления запроса пользователя и векторов из базы знаний</li>
+<li>Вернуть оригиналы наиболее релевантных советов через соотвествение вектор &lt;=&gt; совет</li>
+</ol>
+<h2 id="3-Архитектурные-решения"><a class="header" href="#3-Архитектурные-решения">3. Архитектурные решения</a></h2>
+<h3 id="31-Необходимость-изменений"><a class="header" href="#31-Необходимость-изменений">3.1. Необходимость изменений</a></h3>
+<p>Элементы RAG-системы уже были предусмотрены на первом этапе построение системы, однако требуется внести уточнения связанные c названиями, а также с компонентами, взаимодейтсвующими с поисковой составляющией.
+Компоненты извлечения метаданных и сущностей были удалены как отдельные этапы, поскольку их функциональность может быть реализована внутри Retriever через методы улучшения поиска.</p>
+<p>Теперь схема работы системы примет следующий вид:</p>
+<iframe class="drawio-viewer" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=diagram&url=https://raw.githubusercontent.com/AlexForLinux/neostudy-2026/main/mdbook/diagrams/5-decompose.drawio"></iframe>
+<h3 id="32-Расчет-эффективности-rag-по-сравнению-с-полным-контекстом"><a class="header" href="#32-Расчет-эффективности-rag-по-сравнению-с-полным-контекстом">3.2. Расчет эффективности RAG по сравнению с полным контекстом</a></h3>
+<ol>
+<li>Примем размер базы рецептов за 1000. Размер одного рецепта ~ 600 токенов. В таком случае размер контекста составит 600 000 токенов, что уже не поместится в контекстное окно используемой gpt-oss-120b.</li>
+<li>Примем размер базы рецептоа за 200. Размер одного рецепта ~ 600 токенов. В таком случае размер контекста составит более 120 000 токенов, что еще поместится в контекстное окно. Если взять стоимость 1000 входных токенов за 0,3 руб. (по данным Yandex AI Studio), то цена только входной части запроса составит: 120 000 / 1 000 * 0,3 = 36 (руб), что достаточно дорого.</li>
+<li>Примем, что используется RAG, в рамках которой возвращается 5 документов. Размер одного рецепта ~ 600 токенов. Размер шаблона промпта ~ 250 токенов. В этом случае размер входного контекста: 5 * 600 + 250 = 3250. Стоимость входной части запроса: 3250 / 1000 * 0,3 = 0.975 (руб), что 37 раз выгоднее. Размер обрабатываемого контекста также меньше в 37 раз</li>
+</ol>
+<h3 id="33-Последствия-изменений"><a class="header" href="#33-Последствия-изменений">3.3. Последствия изменений</a></h3>
+<ol>
+<li>+Упрощение архитектуры без изменения внешнего контура системы, как следствие, меньше действий, меньше временных и ресурных затрат.</li>
+<li>+Меньше стоимость по сравнению с полным контектом.</li>
+<li>-Введение RAG ставит новые задачи по корректному ранжированию и применению техник улушения работы ретривера.</li>
+<li>-Качество работы ретривера имеет существенное влияние на результат работы по двум ветвям намерения (рецепты, советы).</li>
+</ol>
 
                     </main>
 
