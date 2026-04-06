@@ -21,7 +21,7 @@ class RecipeRepo:
             cursor.execute("""
                 SELECT name FROM sqlite_master 
                 WHERE type='table' AND name=?
-            """, ('recipe',))
+            """, ('recipes',))
 
             return cursor.fetchone() is not None
         
