@@ -15,9 +15,8 @@ class GPTService:
             model = data.model,
             messages = data.messages,
             temperature = data.temperature,
-            response_format=Recipe
+            response_format=Recipe,
+            max_completion_tokens=20000
         )
 
         return response.choices[0].message.parsed
-
-gpt_service = GPTService()

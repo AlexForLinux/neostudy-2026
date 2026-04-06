@@ -54,12 +54,22 @@ class Step(BaseModel):
         description="Utensils specifically needed for this step from all needed"
     )]
 
+class Advice(BaseModel):
+    title: Annotated[str, Field(
+        ..., 
+        description="Short title of the cooking advice",
+    )]
+    idea: Annotated[str, Field(
+        ..., 
+        description="The main idea of the advice"
+    )]
+
 class Recipe(BaseModel):
     name: Annotated[str, Field(
         ..., 
         description = "Recipe name"
     )]
-    products: Annotated[List[Ingredient], Field(
+    ingredients: Annotated[List[Ingredient], Field(
         default_factory=list,
         description = "Required volume of product for futher cooking"
     )]
@@ -71,7 +81,7 @@ class Recipe(BaseModel):
         default_factory=list, 
         description = "Particular steps of cooking"
     )]
-    advice: Annotated[List[str], Field(
+    advice: Annotated[List[Advice], Field(
         default_factory=list, 
         description = "Extra Advice for better cooking experience"
     )]
