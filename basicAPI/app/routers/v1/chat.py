@@ -1,7 +1,6 @@
 from app.schemas.chat import ChatCompletions
-from app.services.langgraph_service import langgraph_service
+from app.services.service import Service
 from fastapi import APIRouter
-import json
 
 router = APIRouter(prefix="/chat")
 
@@ -10,7 +9,7 @@ def completions(
     completions: ChatCompletions
 ):
     try:
-        response = langgraph_service.run(completions)
+        response = Service.get_services().langgraph_service.run(completions)
         return response
-    except:
-        return {"message": "Unexpected error", "status": 500}
+    except Exception as e:
+        return {"status": 500, "message": e}

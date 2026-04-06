@@ -2,6 +2,8 @@ fastapi
 uvicorn
 pydantic-settings
 python-dotenv
-ollama
 openai
 langgraph
+faiss
+sentence-transformers
+sqlite3
