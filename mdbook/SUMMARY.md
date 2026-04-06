@@ -10,3 +10,6 @@
 # Prompt Engineering (18.03 - 01.04)
 1. [Проектирование базового промпта](./promptEngineering/basicPrompt.md)
 2. [Защита от атак](./promptEngineering/security.md)
+
+# RAG (23.03 - 06.04)
+1. [Введение в RAG](./rag/intro.md)
