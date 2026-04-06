@@ -1,0 +1,8 @@
+{
+    "corpus": "tests/eval_retriever\\1\\data\\recipes",
+    "db": "tests/eval_retriever\\1\\data\\sqlite_test.db",
+    "faiss": "tests/eval_retriever\\1\\data\\faiss_test.db",
+    "queries": "tests/eval_retriever\\1\\data\\queries.json",
+    "embed_model": "BAAI/bge-m3",
+    "k": 3
+}

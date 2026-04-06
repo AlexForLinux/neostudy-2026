@@ -1,7 +1,12 @@
 # mdbook
 book
+extras
 
 basicAPI/system_prompts
+basicAPI/data
+basicAPI/tests/eval_retriever/0/data/recipes
+basicAPI/tests/eval_retriever/0/data/faiss_test.db
+basicAPI/tests/eval_retriever/0/data/sqlite_test.db
 
 _tools/mdbook-drawio/target/
 _tools/mdbook-drawio/Cargo.lock

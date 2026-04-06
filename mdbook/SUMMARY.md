@@ -13,3 +13,4 @@
 
 # RAG (23.03 - 06.04)
 1. [Введение в RAG](./rag/intro.md)
+2. [Оценка качества ретривера](./rag/retriever_quality.md)
