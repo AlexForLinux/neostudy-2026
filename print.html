@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1819,6 +1819,69 @@
 <li>-Введение RAG ставит новые задачи по корректному ранжированию и применению техник улушения работы ретривера.</li>
 <li>-Качество работы ретривера имеет существенное влияние на результат работы по двум ветвям намерения (рецепты, советы).</li>
 </ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Оценка-качества-ретривера"><a class="header" href="#Оценка-качества-ретривера">Оценка качества ретривера</a></h1>
+<h2 id="Сценарий-использования-ретривера"><a class="header" href="#Сценарий-использования-ретривера">Сценарий использования ретривера</a></h2>
+<p>В кулинарной системе порядок результатов поиска <strong>важен</strong>, так как на следующий этап попадет только ограниченное число рецептов или советов. Если наиболее подходящий рецепт (например, соответствующий набору ингредиентов и кухонной утвари) находится ниже в выдаче, он не будет использован, несмотря на свою релевантность. Это приводит к ухудшению качества итогового ответа.</p>
+<h2 id="Выбор-метрик-оценки"><a class="header" href="#Выбор-метрик-оценки">Выбор метрик оценки</a></h2>
+<p>Условия выбора:
+Q - число тестовых запросов
+K - число выбираемых документов
+P - число всех документов
+K &lt;&lt; P - число выбираемых значительно меньше, чем число всех</p>
+<h3 id="mrrk"><a class="header" href="#mrrk">MRR@k</a></h3>
+<p>Поскольку наболее подходящих результат должен находиться как можно выше в выдаче, то целесообрано использовать <strong>MRR@k</strong>, которая и отражает данный показатель. При расчете метрики достаточно оставиться на первом найденном документе в выдаче. Это означает, что в худшем случае придется разметить Q×K записей.</p>
+<h3 id="mapk"><a class="header" href="#mapk">mAP@k</a></h3>
+<p>Также стоит оценить общую релевантость всех выбранных документов, что осуществимо через <strong>mAP@k</strong>, поскольку она учитывает вес не только первого, а всех релевантых документов в полученной выборке. При расчете этой метрики придется разметики Q×K записей.</p>
+<h3 id="ndcgk"><a class="header" href="#ndcgk">NDCG@k</a></h3>
+<p>С одной стороны <strong>NDCG@k</strong> идеально подходит для данной задачи, поскольку можно назначить степень релеватности документа, например от 0 до 4, где 0 - нереватный, а 4 - 100% попадание. Однако с другой же стороны нужна большая разметка. Чтобы показать это рассмотрим саму формулу метрики:</p>
+<blockquote>
+<p>NDCG@k = DCG@k / IDCG@k</p>
+</blockquote>
+<ol>
+<li>При расчете DCG@k проблем нет, так какждому из k документов мы можем назначить степень соотвествия. Для всех запросов это займет Q×K просмотров</li>
+<li>При расчете IDCG@k начинаются проблемы. Для расчета нужно найти все документы с ненулевой степенью релеватности, которые также нужно расположить по убыванию этой степени релеватности. Значит, в идеале, нужно просмотреть все P документов для каждого запроса, чтобы найти эти заветные документы. А для всех запросов это требует Q×P просмотров, что значительно больше, чем Q×K (K &lt;&lt; P =&gt; Q×K &lt;&lt; Q×P). Примерная оценка ряда идельных рангов, кончено, возможна, однако это искажает точность IDCG@k и как следствие NDCG@k.</li>
+</ol>
+<h3 id="Вывод-8"><a class="header" href="#Вывод-8">Вывод</a></h3>
+<p>Исходя из вышеперечисленных рассуждений выберем метрики <strong>MRR@k</strong> и <strong>mAP@k</strong>, потому что их можно рассчитать наиболее точно при относительно меньших трудозатратах.</p>
+<h2 id="Формирование-данных-для-оценки"><a class="header" href="#Формирование-данных-для-оценки">Формирование данных для оценки</a></h2>
+<ol>
+<li>Составим тестовые запросы, форматы которых:</li>
+</ol>
+<pre><code>{&quot;q_id&quot;: number, &quot;query&quot;: &quot;string&quot;}
+</code></pre>
+<ol start="2">
+<li>Скопируем базу документов, которую мы используем для ретривера.</li>
+<li>Для каждого запроса выполняем вызов ретривера с K. </li>
+<li>Во время шага 3 формируем два списка:</li>
+</ol>
+<p>Формат списка результатов запуска (runs):</p>
+<pre><code>[{&quot;q_id&quot;: number, &quot;r_id&quot;: number, &quot;score&quot;: number, &quot;rank&quot;: number}]
+</code></pre>
+<p>Формат списка для разметки (qrels):</p>
+<pre><code>[{&quot;q_id&quot;: number, &quot;r_id&quot;: number, &quot;score&quot;: number}]
+</code></pre>
+<ol start="5">
+<li>Размечаем релевантность извлеченных документов, определяя значения поля score. 0 - нерелевантен, 1 - релевантен</li>
+</ol>
+<h2 id="Анализ-результатов"><a class="header" href="#Анализ-результатов">Анализ результатов</a></h2>
+<h3 id="Условия-оценки-0"><a class="header" href="#Условия-оценки-0">Условия оценки №0</a></h3>
+<ul>
+<li>corpus: &quot;tests/eval_retriever/data/recipes&quot; - рецепты (70 шт.)</li>
+<li>queries: &quot;tests/eval_retriever/queries/queries.json&quot; - запросы (50 шт.)</li>
+<li>db: &quot;tests/eval_retriever/data/sqlite_test.db&quot; - файл с бд рецептов, составленных на основе рецептов</li>
+<li>faiss: &quot;tests/eval_retriever/data/faiss_test.db&quot; - файл векторной бд, составленной с опорой на бд рецептов</li>
+<li>embed_model: &quot;BAAI/bge-m3&quot; - модель для создания эмбеддингов</li>
+<li>k: 3 - число возвращаемых документов</li>
+</ul>
+<h3 id="Результаты-оценки"><a class="header" href="#Результаты-оценки">Результаты оценки</a></h3>
+<ul>
+<li>MRR@3 = 0.823</li>
+<li>mAP@3 = 0.815</li>
+</ul>
+<h3 id="Дальнейшее-направление-развития"><a class="header" href="#Дальнейшее-направление-развития">Дальнейшее направление развития</a></h3>
+<p>Для текущего набора документов показатели оказались достаточно неплохими.
+Однако в будущем необходимо проверить, как изменятся метрики, если привести документную базу ближе к реалиям (~ 1000 рецептов). Это также необходимо для того, чтобы покрыть наибольшее число нужд пользователей, поскольку выявлены запросы, для которых не было найдено ни одного подходящего документа (рецепт в базе отсутсвует).
+Помимо этого также можно поэксперементировать с параметрами k и embed_model</p>
 
                     </main>
 
