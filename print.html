@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li><li class="chapter-item expanded "><a href="agents/eval.html"><strong aria-hidden="true">11.</strong> Оценка качества агента</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1900,6 +1900,67 @@ K &lt;&lt; P - число выбираемых значительно меньш
 </div>
 <h2 id="Риски-и-политики-использования"><a class="header" href="#Риски-и-политики-использования">Риски и политики использования</a></h2>
 <p>Все предложенные инструменты относятся к типу &quot;Инструмент чтения&quot;, риски снижены. Однако, стоит отметить, что доверие к локальным источникам данных выше, чем к внешним. Необходимо обозначить этот приоритет для модели через system prompt. HitL не нужен.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Оценка-качества-агентов"><a class="header" href="#Оценка-качества-агентов">Оценка качества агентов</a></h1>
+<h2 id="Сценарии-использования-агента"><a class="header" href="#Сценарии-использования-агента">Сценарии использования агента</a></h2>
+<h3 id="Сценарий-1-1"><a class="header" href="#Сценарий-1-1">Сценарий 1</a></h3>
+<p>Условие: Ответ на вопрос пользователя есть в локальной базе знаний
+Happy Path:</p>
+<ol>
+<li>Агент обратился к текстовому ретриверу.</li>
+<li>Агент собрал достаточно данных.</li>
+</ol>
+<h3 id="Сценарий-2-1"><a class="header" href="#Сценарий-2-1">Сценарий 2</a></h3>
+<p>Условие: Ответ на вопрос пользователя отсутсвуте в локальной базе знаний
+Happy path:</p>
+<ol>
+<li>Агент обратился к текстовому ретриверу. Понял, что этих данных недостаточно или что нужные данные отустсвуют.</li>
+<li>Агент сделал запрос через WebSearch.</li>
+<li>Агент выбрал подходящий из результатов запроса источник и прочитал его.</li>
+<li>Агент собрал достаточно данных.</li>
+</ol>
+<h2 id="Метрики-оценки"><a class="header" href="#Метрики-оценки">Метрики оценки</a></h2>
+<ol>
+<li>Среднее число шагов на задачу по всем задачам и по каждому сценарию отдельно</li>
+<li>Средняя оценка соотвествия ожидаемому сценарию по всем задачам и по каждому сценарию отдельно</li>
+<li>Средняя оценка качества ответа по всем задачам и по каждому сценарию отдельно</li>
+<li>Среднее время всего цикла рассуждения по всем задачам и по каждому сценарию отдельно</li>
+</ol>
+<h2 id="Способо-формирования-данных-для-оценки"><a class="header" href="#Способо-формирования-данных-для-оценки">Способо формирования данных для оценки</a></h2>
+<ol>
+<li>Составить 10 запросов пользователей, 5 из которых идут по сценарию 1, а 5 по сценарию 2.</li>
+<li>Каждый такой запрос повторить K раз</li>
+<li>Занести полученные результаты в таблицу со столбцами:</li>
+</ol>
+<ul>
+<li>запрос-задача</li>
+<li>номер сценария</li>
+<li>число шагов </li>
+<li>время выполнения</li>
+<li>использование инструментов (последовательность вызовов X-&gt;Y-&gt;Z)</li>
+<li>соотвествие сценарию (2 - полное соответсвие, 1 - частничное соотвествие, 0 - отсутствие соответствия)</li>
+<li>оценка итогового ответа (0-5, где 0 - агент не достиг цели, ответ не соотвествует запросу, 5 - агент успешно достиг цели, ответ полностью соотвествует запросу)</li>
+</ul>
+<ol start="4">
+<li>Рассчитать метрики</li>
+</ol>
+<h2 id="Результаты-оценки-1"><a class="header" href="#Результаты-оценки-1">Результаты оценки</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Сценарий</th><th>Метрика</th><th>avg</th><th>std</th></tr></thead><tbody>
+<tr><td><strong>all</strong></td><td>steps</td><td>5.53</td><td>0.62</td></tr>
+<tr><td></td><td>total_time</td><td>16.78</td><td>5.26</td></tr>
+<tr><td></td><td>scenario_match</td><td>1.53</td><td>0.50</td></tr>
+<tr><td></td><td>response_quality</td><td>4.07</td><td>0.77</td></tr>
+<tr><td><strong>scenario-1</strong></td><td>steps</td><td>5.07</td><td>1.61</td></tr>
+<tr><td></td><td>total_time</td><td>19.26</td><td>9.30</td></tr>
+<tr><td></td><td>scenario_match</td><td>0.60</td><td>0.80</td></tr>
+<tr><td></td><td>response_quality</td><td>3.67</td><td>0.79</td></tr>
+<tr><td><strong>scenario-2</strong></td><td>steps</td><td>5.53</td><td>0.62</td></tr>
+<tr><td></td><td>total_time</td><td>16.78</td><td>5.26</td></tr>
+<tr><td></td><td>scenario_match</td><td>1.53</td><td>0.50</td></tr>
+<tr><td></td><td>response_quality</td><td>4.07</td><td>0.77</td></tr>
+</tbody></table>
+</div>
+<h3 id="Краткое-резюме"><a class="header" href="#Краткое-резюме">Краткое резюме</a></h3>
+<p>Агент повел себя более предсказуемо в сценарии второго типа, в свою очередь при первом сценарии, несмотря на наличии сведений в локальной базе данных, агент решал прибегать в поиску в Интернете. Исходя из этого стоит усилить позицию инструмента get_recipes путем расширения базы рецептов. Проблем с самим инструментами выявлено не было</p>
 
                     </main>
 
