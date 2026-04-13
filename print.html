@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -1882,6 +1882,24 @@ K &lt;&lt; P - число выбираемых значительно меньш
 <p>Для текущего набора документов показатели оказались достаточно неплохими.
 Однако в будущем необходимо проверить, как изменятся метрики, если привести документную базу ближе к реалиям (~ 1000 рецептов). Это также необходимо для того, чтобы покрыть наибольшее число нужд пользователей, поскольку выявлены запросы, для которых не было найдено ни одного подходящего документа (рецепт в базе отсутсвует).
 Помимо этого также можно поэксперементировать с параметрами k и embed_model</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Выбор-инструментов"><a class="header" href="#Выбор-инструментов">Выбор инструментов</a></h1>
+<h2 id="Сценарий-использования-агента"><a class="header" href="#Сценарий-использования-агента">Сценарий использования агента</a></h2>
+<p>Агент <em>в рамках данного задания</em> должен суметь определить источники (локальные и внешние), по которым можно составить наиболее полный рецепт по запросу пользователя</p>
+<h3 id="Сценарий-1"><a class="header" href="#Сценарий-1">Сценарий 1</a></h3>
+<p>Локальная база значний содержит рецепты, которые соотвествуют запросу пользователя. Достаточно локальных источников</p>
+<h3 id="Сценарий-2"><a class="header" href="#Сценарий-2">Сценарий 2</a></h3>
+<p>Локальная база знаний содержит неполную информацию о заправшиваемом блюде. Необходим внешний поиск</p>
+<h2 id="Среда"><a class="header" href="#Среда">Среда</a></h2>
+<p>Для работы в рамках сценарией агенту придется взаимодействовать с источниками данных, а именно: с локальной базой знаний о рецептах и интерентом. Таким образом, средой является локальная база знаний и интернет.</p>
+<h2 id="Инструменты"><a class="header" href="#Инструменты">Инструменты</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Инструмент</th><th>Тип</th><th>Назначение</th><th>Вход</th><th>Выход</th></tr></thead><tbody>
+<tr><td>get_recipes</td><td>Инструмент Чтения</td><td>Получить рецепты из доверенной БЗ</td><td>строка с запросом</td><td>Список из k документов</td></tr>
+<tr><td>web_search</td><td>Инструмент Чтения</td><td>Получить ссылки на источники данных</td><td>строка с запросом</td><td>Список из n ссылкок</td></tr>
+<tr><td>url_reader</td><td>Инструмент Чтения</td><td>Получить содержимое web-страницы по url</td><td>строка с url</td><td>Содержимое web-страницы</td></tr>
+</tbody></table>
+</div>
+<h2 id="Риски-и-политики-использования"><a class="header" href="#Риски-и-политики-использования">Риски и политики использования</a></h2>
+<p>Все предложенные инструменты относятся к типу &quot;Инструмент чтения&quot;, риски снижены. Однако, стоит отметить, что доверие к локальным источникам данных выше, чем к внешним. Необходимо обозначить этот приоритет для модели через system prompt. HitL не нужен.</p>
 
                     </main>
 

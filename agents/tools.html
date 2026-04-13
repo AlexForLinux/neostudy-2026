@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Выбор модели для AI-систем - neostudy-2026</title>
+        <title>Выбор Инструментов - neostudy-2026</title>
 
 
         <!-- Custom HTML head -->
@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="../evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/llm_choice.html" class="active"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="../promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="../promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="../rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="../rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="../agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="../evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="../promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="../promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="../rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="../rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="../agents/tools.html" class="active"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -172,48 +172,33 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Выбор-модели-для-ai-систем"><a class="header" href="#Выбор-модели-для-ai-систем">Выбор модели для AI-систем</a></h1>
-<h3 id="Жёсткие-атрибуты"><a class="header" href="#Жёсткие-атрибуты">Жёсткие атрибуты</a></h3>
-<ul>
-<li>Инфраструктура - Для стартового проекта построение своей инфраструктуры для развертывания модели извлишне затратно как по времени, так и средствам</li>
-<li>Доступность - есть доступ к моделям без ограничений и трудностей оплаты в России</li>
-</ul>
-<h3 id="Кандидаты"><a class="header" href="#Кандидаты">Кандидаты</a></h3>
-<p>Исходя из ограничений выбор удалось сузить до нескольких вариантов:</p>
-<ol>
-<li>gpt-oss-120b</li>
-<li>qwen-3-235b-a22b-instruct-2507</li>
-<li>gigachat-2-lite</li>
-<li>yandexgpt-5.1</li>
-<li>deepseek-v3.2</li>
-</ol>
-<h3 id="Сравнение-кандидатов"><a class="header" href="#Сравнение-кандидатов">Сравнение кандидатов</a></h3>
-<p>Используя ранее реализованные методы по оценке, а также общие сведения о моделях, составлена таблица сравнения </p>
-<div class="table-wrapper"><table><thead><tr><th>Критерий</th><th>gpt-oss-120b</th><th>gigachat-2-lite</th><th>yandexgpt-5.1</th><th>qwen-3-235b-a22b</th><th>deepseek-v3.2</th></tr></thead><tbody>
-<tr><td>Кулинарная компетентность</td><td>Отличная</td><td>Хорошая</td><td>Хорошая</td><td>Отличная</td><td>Отличная</td></tr>
-<tr><td>Завершенность ответов</td><td>Завершенные</td><td>Иногда диалог выглядит сломанным</td><td>Заверешенные в большинстве случаев</td><td>Завершенные</td><td>Завершенные</td></tr>
-<tr><td>Структура</td><td>Четкая иерархия, акценты, таблицы</td><td>Есть иерархия, акценты</td><td>Есть иерархия, акценты</td><td>Есть иерархия, акценты</td><td>Четкая иерархия, акценты</td></tr>
-<tr><td>Нежелательное следование инструкциям</td><td>Не обнаружено</td><td>Не обнаружено</td><td>Не обнаружено</td><td>Не обнаружено</td><td>Не обнаружено</td></tr>
-<tr><td>Размышляющая модель</td><td>Да</td><td>Нет</td><td>Нет</td><td>Нет</td><td>Дa</td></tr>
-<tr><td>Стоимость тестирования*</td><td>14 руб.</td><td>0 руб.**</td><td>5 руб.</td><td>10 руб.</td><td>26 руб.</td></tr>
+                        <h1 id="Выбор-инструментов"><a class="header" href="#Выбор-инструментов">Выбор инструментов</a></h1>
+<h2 id="Сценарий-использования-агента"><a class="header" href="#Сценарий-использования-агента">Сценарий использования агента</a></h2>
+<p>Агент <em>в рамках данного задания</em> должен суметь определить источники (локальные и внешние), по которым можно составить наиболее полный рецепт по запросу пользователя</p>
+<h3 id="Сценарий-1"><a class="header" href="#Сценарий-1">Сценарий 1</a></h3>
+<p>Локальная база значний содержит рецепты, которые соотвествуют запросу пользователя. Достаточно локальных источников</p>
+<h3 id="Сценарий-2"><a class="header" href="#Сценарий-2">Сценарий 2</a></h3>
+<p>Локальная база знаний содержит неполную информацию о заправшиваемом блюде. Необходим внешний поиск</p>
+<h2 id="Среда"><a class="header" href="#Среда">Среда</a></h2>
+<p>Для работы в рамках сценарией агенту придется взаимодействовать с источниками данных, а именно: с локальной базой знаний о рецептах и интерентом. Таким образом, средой является локальная база знаний и интернет.</p>
+<h2 id="Инструменты"><a class="header" href="#Инструменты">Инструменты</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Инструмент</th><th>Тип</th><th>Назначение</th><th>Вход</th><th>Выход</th></tr></thead><tbody>
+<tr><td>get_recipes</td><td>Инструмент Чтения</td><td>Получить рецепты из доверенной БЗ</td><td>строка с запросом</td><td>Список из k документов</td></tr>
+<tr><td>web_search</td><td>Инструмент Чтения</td><td>Получить ссылки на источники данных</td><td>строка с запросом</td><td>Список из n ссылкок</td></tr>
+<tr><td>url_reader</td><td>Инструмент Чтения</td><td>Получить содержимое web-страницы по url</td><td>строка с url</td><td>Содержимое web-страницы</td></tr>
 </tbody></table>
 </div>
-<p>*- Тестирование выполнено через Yandex Ai Studio, за исключением GigaChat, на одном и том же наборе запросов</p>
-<p>**- Первые 1М бесплатно, далее - пакетами. Мин. цена пакета - 1300 руб. за 20M</p>
-<h3 id="Выбор-модели"><a class="header" href="#Выбор-модели">Выбор модели</a></h3>
-<p>Исходя из таблицы, в качестве итоговой модели была выбрана размышляющая модель <strong>gpt-oss-120b</strong> за умеение четко и наглядно представлять информацию, не устапая по компетентности в кулинарии qwen-3-235b-a22b-instruct-2507 и deepseek-v3.2.</p>
+<h2 id="Риски-и-политики-использования"><a class="header" href="#Риски-и-политики-использования">Риски и политики использования</a></h2>
+<p>Все предложенные инструменты относятся к типу &quot;Инструмент чтения&quot;, риски снижены. Однако, стоит отметить, что доверие к локальным источникам данных выше, чем к внешним. Необходимо обозначить этот приоритет для модели через system prompt. HitL не нужен.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../evaluateLLMs/error_analysis.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../rag/retriever_quality.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../promptEngineering/basicPrompt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -221,13 +206,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../evaluateLLMs/error_analysis.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../rag/retriever_quality.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../promptEngineering/basicPrompt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
