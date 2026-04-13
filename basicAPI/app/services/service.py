@@ -2,6 +2,7 @@ from .gpt_service import GPTService
 from .prompt_service import PromptService
 from .recipe_retriever_service import RecipeRetrieverService
 from .langgraph_service import LanggraphService
+from .agentic_service import AgenticService
 from app.repo.recipe_repo import RecipeRepo
 from app.config import settings
 from sentence_transformers import SentenceTransformer
@@ -38,3 +39,5 @@ class Service:
             self.recipe_retriever_service, 
             self.gpt_service
         )
+
+        self.agentic_service = AgenticService(self.recipe_retriever_service, self.prompt_service)

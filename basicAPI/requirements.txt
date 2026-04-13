@@ -4,6 +4,6 @@ pydantic-settings
 python-dotenv
 openai
 langgraph
-faiss
 sentence-transformers
-sqlite3
+ddgs
+trafilatura
