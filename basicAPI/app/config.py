@@ -8,10 +8,14 @@ class Settings(BaseSettings):
     other_prompt: str
     recipe_prompt: str
 
+    build_recipe: str
+    collect_recipe: str
+
     recipe_docs: str
 
     sqlite_db: str
     recipe_faiss: str
+
 
     model_config = SettingsConfigDict(
         env_file=".env",

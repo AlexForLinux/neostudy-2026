@@ -21,7 +21,9 @@ class Service:
         self.prompt_service = PromptService({
             'recipe': settings.recipe_prompt,
             'advice': settings.advice_prompt,
-            'other': settings.other_prompt
+            'other': settings.other_prompt,
+            'collect_recipe': settings.collect_recipe,
+            'build_recipe': settings.build_recipe
         })
 
         self.__recipeRepo = RecipeRepo(settings.sqlite_db, settings.recipe_docs)

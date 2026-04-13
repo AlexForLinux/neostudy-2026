@@ -49,7 +49,7 @@ class Step(BaseModel):
         default = None,
         description = "Approximate duration of the step in minutes"
     )]
-    utensils: Annotated[List[str], Field(
+    step_utensils: Annotated[List[str], Field(
         default_factory=list,
         description="Utensils specifically needed for this step from all needed"
     )]
