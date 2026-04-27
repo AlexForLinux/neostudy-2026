@@ -1,0 +1,335 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Fine Tuning - neostudy-2026</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../mdbook/_assets/custom.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="../evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="../evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="../promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="../promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="../rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="../rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="../agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li><li class="chapter-item expanded "><a href="../agents/eval.html"><strong aria-hidden="true">11.</strong> Оценка качества агента</a></li><li class="chapter-item expanded affix "><li class="part-title">Fine Tuning (13.04 - 27.04)</li><li class="chapter-item expanded "><a href="../fineTuning/fineTuning.html" class="active"><strong aria-hidden="true">12.</strong> Fine Tuning</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">neostudy-2026</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="fine-tuning"><a class="header" href="#fine-tuning">Fine Tuning</a></h1>
+<h2 id="1-Поставнока-задачи"><a class="header" href="#1-Поставнока-задачи">1. Поставнока задачи</a></h2>
+<h3 id="Цель"><a class="header" href="#Цель">Цель</a></h3>
+<p>Выполнить Fine Tuning по стратегии прогрессии с фиксацией ключевых параметров для решения задачи классификации обращений по проблемам в городе, представляющих собой текстовые сообщения</p>
+<h3 id="Источник"><a class="header" href="#Источник">Источник</a></h3>
+<p>Задача выбрана на основе вариантов из https://huggingface.co/datasets во вкладке Tasks/Natural Language Processing/Text Classification, а именно - <strong>Adilbai/kz-gov-complaints-data-kz-ru</strong></p>
+<h3 id="Ограничения"><a class="header" href="#Ограничения">Ограничения</a></h3>
+<p>Обучение ограничено возможностями ноутбука MSI Sword 15 A12UE-487XRU, оснащённом GPU NVIDIA GeForce RTX 3060 с 6 ГБ видеопамяти</p>
+<h2 id="2-Набор-данных-и-его-подготовка"><a class="header" href="#2-Набор-данных-и-его-подготовка">2. Набор данных и его подготовка</a></h2>
+<h3 id="Описание"><a class="header" href="#Описание">Описание</a></h3>
+<p>Набор данных Adilbai/kz-gov-complaints-data-kz-ru содержит 1200 записей обращений горожан по городским проблемам на русском и казахском языках. Записи разделены на 10 категорий. Каждая категория занимает 10% +- 0.3% записией, что говорит о сбалансированности классов.</p>
+<h3 id="Стркутура"><a class="header" href="#Стркутура">Стркутура</a></h3>
+<p>Данные имеют табличный вид с аттрибутами: </p>
+<ul>
+<li>id - уникальный идентификатор обращения int64, </li>
+<li>text_kz - текст обращения на казахском string, </li>
+<li>text_ru - текст обращения на русском string, </li>
+<li>category - класс обращения string, </li>
+<li>urgency - степень срочности string, </li>
+<li>region - регион происшествия string, </li>
+<li>status - статус обращения string, </li>
+<li>reply_text - ответ оператора string, </li>
+<li>duplicate - повторное ли обращения bool,</li>
+</ul>
+<h3 id="План-преобразования"><a class="header" href="#План-преобразования">План преобразования</a></h3>
+<p>Для задачи классификации выделим из данного набора обращения на русском языке и катеории. Категории преобразуем в численный вид путем сопоставления &quot;класс - номер класса&quot;. Далее полученную таблицу разделим на две части - train и val</p>
+<h3 id="Примеры-пар-для-классификаии"><a class="header" href="#Примеры-пар-для-классификаии">Примеры пар для классификаии</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>На входе - текст</th><th>Имя класса</th><th>На выходе - номер класса (int)</th></tr></thead><tbody>
+<tr><td>В городе Шымкент по проспекту Тауке хана мусорные контейнеры постоянно переполнены. Их не вывозят вовремя, распространяется неприятный запах. Помогите решить проблему.</td><td>ЖКХ</td><td>0</td></tr>
+<tr><td>В Туркестанской области очень низкое качество интернета. Часто происходят обрывы, скорость низкая. Прошу повлиять на улучшение работы провайдеров.</td><td>интернет</td><td>2</td></tr>
+<tr><td>К участковому врачу нужно записываться за месяц. А как попасть на прием, если случай срочный?</td><td>медицина</td><td>4</td></tr>
+</tbody></table>
+</div>
+<h2 id="3-Стратегия"><a class="header" href="#3-Стратегия">3. Стратегия</a></h2>
+<p>В качестве стратегии выбрана прогрессия, заключающаяся в последовательном переходе от малых моделей к более крупным. Это позволяет оценить качество данных и определить предельные показатели модели при заданных вычислительных затратах.</p>
+<h3 id="Основные-модели"><a class="header" href="#Основные-модели">Основные модели</a></h3>
+<ol>
+<li>Малая модель для проверки работы пайплайна и оценки качества при минимальных затратах: Bingsu/llama-190m-arch</li>
+<li>Модель &quot;среднего&quot; размера - промежуточная точка: Qwen/Qwen2.5-0.5B-Instruct</li>
+<li>Модель &quot;крупная&quot; для определения верхнего предела: Qwen/Qwen2.5-3B-Instruct-4bit</li>
+</ol>
+<h3 id="Доп-модели-для-промежуточных-оценок"><a class="header" href="#Доп-модели-для-промежуточных-оценок">Доп. модели для промежуточных оценок</a></h3>
+<ol>
+<li>google/gemma-3-270m</li>
+<li>google/gemma-3-1b-it</li>
+<li>Qwen/Qwen2.5-1.5B-Instruct</li>
+</ol>
+<h3 id="Влияние-a-и-r"><a class="header" href="#Влияние-a-и-r">Влияние a и r</a></h3>
+<p>Для определения влияния a и r гиперпараметров, основные модели будут обучены для разных пар a,r. Часть экспериментов напрвлены на оценку влияния r при фиксированном a/r, а часть направлено на влияние соотношения a/r при фиксированном r.</p>
+<div class="table-wrapper"><table><thead><tr><th>№</th><th>a</th><th>r</th><th>a/r</th></tr></thead><tbody>
+<tr><td>1</td><td>32</td><td>8</td><td>4</td></tr>
+<tr><td>2</td><td>8</td><td>2</td><td>4</td></tr>
+<tr><td>3</td><td>128</td><td>32</td><td>4</td></tr>
+<tr><td>4</td><td>2</td><td>8</td><td>1/4</td></tr>
+<tr><td>5</td><td>8</td><td>8</td><td>1</td></tr>
+</tbody></table>
+</div>
+<h2 id="4-Метрики-оценки-качества-и-цены"><a class="header" href="#4-Метрики-оценки-качества-и-цены">4. Метрики оценки качества и цены</a></h2>
+<h3 id="Качество"><a class="header" href="#Качество">Качество</a></h3>
+<ul>
+<li>Поскольку классы сбалансированы можно применить <strong>Accuracy</strong></li>
+<li>В дополнение к ней также рассмотрим <strong>Macro-F1</strong>, которая дает учитывать точность и полноту классификации по каждому классу. 
+Ожидается, что значения Accuracy и Macro-F1 будут близки, однако F1-мера используется для дополнительной проверки устойчивости модели.</li>
+</ul>
+<h3 id="Цена"><a class="header" href="#Цена">Цена</a></h3>
+<ul>
+<li>Размер итоговой модели - определяет объём занимаемой памяти, а также может указывать на требования к аппаратному обеспечению, если появится необходимость в размещении такой модели</li>
+</ul>
+<h2 id="5-Сравнение-по-результатам"><a class="header" href="#5-Сравнение-по-результатам">5. Сравнение по результатам</a></h2>
+<p>Обзор влияния гиперпараметров a,r:</p>
+<div class="table-wrapper"><table><thead><tr><th>Модель</th><th>a</th><th>r</th><th>a/r</th><th>Лучшая Macro-F1</th><th>Лучшая Эпоха</th></tr></thead><tbody>
+<tr><td>Bingsu/llama-190m-arch</td><td>32</td><td>8</td><td>4</td><td>0.6834</td><td>300</td></tr>
+<tr><td>Qwen/Qwen2.5-0.5B-Instruct</td><td>32</td><td>8</td><td>4</td><td>0.9690</td><td>315</td></tr>
+<tr><td>Qwen/Qwen2.5-3B-Instruct-4bit</td><td>32</td><td>8</td><td>4</td><td>0.9782</td><td>270</td></tr>
+<tr><td>Bingsu/llama-190m-arch</td><td>8</td><td>2</td><td>4</td><td>0.5778</td><td>255</td></tr>
+<tr><td>Qwen/Qwen2.5-0.5B-Instruct</td><td>8</td><td>2</td><td>4</td><td>0.9450</td><td>390</td></tr>
+<tr><td>Qwen/Qwen2.5-3B-Instruct-4bit</td><td>8</td><td>2</td><td>4</td><td>0.9740</td><td>360</td></tr>
+<tr><td>Bingsu/llama-190m-arch</td><td>128</td><td>32</td><td>4</td><td>0.7903</td><td>405</td></tr>
+<tr><td>Qwen/Qwen2.5-0.5B-Instruct</td><td>128</td><td>32</td><td>4</td><td>0.9643</td><td>315</td></tr>
+<tr><td>Qwen/Qwen2.5-3B-Instruct-4bit</td><td>128</td><td>32</td><td>4</td><td>0.9713</td><td>255</td></tr>
+<tr><td>Bingsu/llama-190m-arch</td><td>8</td><td>8</td><td>1</td><td>0.5827</td><td>255</td></tr>
+<tr><td>Qwen/Qwen2.5-0.5B-Instruct</td><td>8</td><td>8</td><td>1</td><td>0.9282</td><td>255</td></tr>
+<tr><td>Qwen/Qwen2.5-3B-Instruct-4bit</td><td>8</td><td>8</td><td>1</td><td>0.9636</td><td>300</td></tr>
+<tr><td>Bingsu/llama-190m-arch</td><td>2</td><td>8</td><td>0.25</td><td>0.5526</td><td>300</td></tr>
+<tr><td>Qwen/Qwen2.5-0.5B-Instruct</td><td>2</td><td>1</td><td>0.25</td><td>0.9103</td><td>390</td></tr>
+<tr><td>Qwen/Qwen2.5-3B-Instruct-4bit</td><td>2</td><td>8</td><td>0.25</td><td>0.9038</td><td>390</td></tr>
+</tbody></table>
+</div>
+<p>Исходя из сведений в таблице:</p>
+<ol>
+<li>Уменьшение отношения a/r ослабляет влияние прибавляемых весов, что приводит к недостаточному качеству</li>
+<li>Уменьшение параметра r ограничивает размерность адаптационного пространства, что снижает гибкость модели и ведет к падению метрик качества или не достижению желаемого качества за выбранные эпохи (недообучение)</li>
+<li>Оптимальное соотношение для выбранной задачи составляет a/r = 4. Для средней и крупной модели при r=8, a=32. Для малой модели при r=32, a=128</li>
+</ol>
+<p>Исходя из полученных выводов, выберем пару a=32 и r=8 как единую ось для итогового сравнения.
+Дополнительные эксперементы при a=32 и r=8 дали следующие результаты:</p>
+<div class="table-wrapper"><table><thead><tr><th>Модель</th><th>a</th><th>r</th><th>a/r</th><th>Лучшая Macro-F1</th><th>Лучшый Шаг (из 405)</th></tr></thead><tbody>
+<tr><td>google/gemma-3-270m</td><td>32</td><td>8</td><td>4</td><td>0.9660</td><td>405</td></tr>
+<tr><td>google/gemma-3-1b-it</td><td>32</td><td>8</td><td>4</td><td>0.9782</td><td>225</td></tr>
+<tr><td>Qwen/Qwen2.5-1.5B-Instruct</td><td>32</td><td>8</td><td>4</td><td>0.9786</td><td>240</td></tr>
+</tbody></table>
+</div>
+<p>Сформируем итоговую сравнительную таблицу на выбранной оси (a=32 и r=8):</p>
+<div class="table-wrapper"><table><thead><tr><th>Модель</th><th>Качество (Macro-F1)</th><th>Лучшый Шаг (из 405)</th></tr></thead><tbody>
+<tr><td>Bingsu/llama-190m-arch</td><td>0.6834</td><td>~0.4</td></tr>
+<tr><td>google/gemma-3-270m</td><td>0.9660</td><td>~0.6</td></tr>
+<tr><td>Qwen/Qwen2.5-0.5B-Instruct</td><td>0.9690</td><td>~1.0</td></tr>
+<tr><td>Qwen/Qwen2.5-3B-Instruct-4bit</td><td>0.9782</td><td>~1.5</td></tr>
+<tr><td>google/gemma-3-1b-it</td><td>0.9782</td><td>~2.0</td></tr>
+<tr><td>Qwen/Qwen2.5-1.5B-Instruct</td><td>0.9786</td><td>~3.0</td></tr>
+</tbody></table>
+</div>
+<p><img src="https://raw.githubusercontent.com/AlexForLinux/neostudy-2026/main/mdbook/images/plt.png" alt="Диаграмма рассеяния" /></p>
+<h2 id="6-Выбор-модели"><a class="header" href="#6-Выбор-модели">6. Выбор модели</a></h2>
+<p>Полученные результаты склоняют к выбору модели <strong>google/gemma-3-270m</strong> для поставленной задачи, поскольку модель весит в 2-5 раз меньше относительно моделей, превосходящих по качеству лишь на 1.2%</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../agents/eval.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../agents/eval.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
