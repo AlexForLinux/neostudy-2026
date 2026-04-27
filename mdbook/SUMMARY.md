@@ -18,3 +18,6 @@
 # Agents (30.03 - 13.04)
 1. [Выбор Инструментов](./agents/tools.md)
 2. [Оценка качества агента](./agents/eval.md)
+
+# Fine Tuning (13.04 - 27.04)
+1. [Fine Tuning](./fineTuning/fineTuning.md)
