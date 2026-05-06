@@ -22,5 +22,6 @@
 # Fine Tuning (13.04 - 27.04)
 1. [Fine Tuning](./fineTuning/fineTuning.md)
 
-2. # Data Engineering (20.04 - 04.05)
+# Data Engineering (20.04 - 04.05)
 1. [Подготовка данных](./data/data.md)
+

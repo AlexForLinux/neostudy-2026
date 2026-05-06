@@ -1,0 +1,165 @@
+[
+    {
+        "name": "(A1,B1,C1,D1)",
+        "prompt_path": "./prompts/recipe.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 16},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Time]]", "value": "не более 45 минут"},
+            {"placeholder": "[[Food]]", "value": "Рецепт должен требовать только такие ингредиенты как: сезонные овощи и фруктры (для СНГ), сыр, молоко и молочные продукты, колбаса, вода, крупы, мука"},
+            {"placeholder": "[[Utencils]]", "value": "Для приготовления блюда могут использоваться только:  нож, вилка, ложка, тарелка, миска, стакан, венчик"}
+        ]
+    },
+    {
+        "name": "(A1,B1,C1,D2)",
+        "prompt_path": "./prompts/recipe.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 60},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Time]]", "value": "не более 1.5 часа"},
+            {"placeholder": "[[Food]]", "value": "Рецепт должен требовать только такие ингредиенты как: сезонные овощи и фруктры (для СНГ), сыр, молоко и молочные продукты, колбаса, вода, крупы, мука и мясо (рыба, курица, говядина, свинина и тп)"},
+            {"placeholder": "[[Utencils]]", "value": "Для приготовления блюда могут использоваться только:  нож, вилка, ложка, тарелка, миска, стакан, венчик, кастрюля, сковорода, плита, микроволновка, тёрка"}
+        ]
+    },
+    {
+        "name": "(A1,B1,C1,D3)",
+        "prompt_path": "./prompts/recipe.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 8},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Time]]", "value": "более 1.5 часа"},
+            {"placeholder": "[[Food]]", "value": "Рецепт должен требовать ингредиенты, помимо следующих: сезонные овощи и фруктры (для СНГ), сыр, молоко и молочные продукты, колбаса, вода, крупы, мука и мясо (рыба, курица, говядина, свинина и тп)"},
+            {"placeholder": "[[Utencils]]", "value": "Для приготовления блюда могут использоваться не только: нож, вилка, ложка, тарелка, миска, стакан, венчик, кастрюля, сковорода, плита, микроволновка, тёрка"}
+        ]
+    },
+    {
+        "name": "(A1,B1,C2,D1)",
+        "prompt_path": "./prompts/recipe.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 10},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Time]]", "value": "не более 45 минут"},
+            {"placeholder": "[[Food]]", "value": "Рецепт должен требовать только такие ингредиенты как: сезонные овощи и фруктры (для СНГ), сыр, молоко и молочные продукты, колбаса, вода, крупы, мука"},
+            {"placeholder": "[[Utencils]]", "value": "Для приготовления блюда могут использоваться только:  нож, вилка, ложка, тарелка, миска, стакан, венчик"}
+        ]
+    },
+    {
+        "name": "(A1,B1,C2,D2)",
+        "prompt_path": "./prompts/recipe.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 40},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Time]]", "value": "не более 1.5 часа"},
+            {"placeholder": "[[Food]]", "value": "Рецепт должен требовать только такие ингредиенты как: сезонные овощи и фруктры (для СНГ), сыр, молоко и молочные продукты, колбаса, вода, крупы, мука и мясо (рыба, курица, говядина, свинина и тп)"},
+            {"placeholder": "[[Utencils]]", "value": "Для приготовления блюда могут использоваться только:  нож, вилка, ложка, тарелка, миска, стакан, венчик, кастрюля, сковорода, плита, микроволновка, тёрка"}
+        ]
+    },
+    {
+        "name": "(A1,B1,C2,D3)",
+        "prompt_path": "./prompts/recipe.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 6},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Time]]", "value": "более 1.5 часа"},
+            {"placeholder": "[[Food]]", "value": "Рецепт должен требовать ингредиенты, помимо следующих: сезонные овощи и фруктры (для СНГ), сыр, молоко и молочные продукты, колбаса, вода, крупы, мука и мясо (рыба, курица, говядина, свинина и тп)"},
+            {"placeholder": "[[Utencils]]", "value": "Для приготовления блюда могут использоваться не только: нож, вилка, ложка, тарелка, миска, стакан, венчик, кастрюля, сковорода, плита, микроволновка, тёрка"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C1,E1)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 6},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "времени приготовления"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C1,E2)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 6},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "замене ингредиентов"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C1,E3)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 6},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "замене кухонной утвари"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C1,E4)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 6},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "исправлению ошибки"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C1,E5)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 6},
+            {"placeholder": "[[Locality]]", "value": "должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "хранению"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C2,E1)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 4},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "времени приготовления"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C2,E2)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 4},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "замене ингредиентов"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C2,E3)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 4},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "замене кухонной утвари"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C2,E4)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 4},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "исправлению ошибки"}
+        ]
+    },
+    {
+        "name": "(A1,B2,C2,E5)",
+        "prompt_path": "./prompts/advice.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 4},
+            {"placeholder": "[[Locality]]", "value": "не должен быть представлен"},
+            {"placeholder": "[[Advice Class]]", "value": "хранению"}
+        ]
+    },
+    {
+        "name": "(A2)",
+        "prompt_path": "./prompts/off-top.txt",
+        "injections": [
+            {"placeholder": "[[Number]]", "value": 10}
+        ]
+    }
+]

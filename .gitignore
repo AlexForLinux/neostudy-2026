@@ -2,6 +2,8 @@
 book
 extras
 
+data_gen/settings/env.json
+
 basicAPI/system_prompts
 basicAPI/data
 basicAPI/tests/eval_retriever/0/data/recipes
