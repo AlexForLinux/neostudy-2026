@@ -90,7 +90,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li><li class="chapter-item expanded "><a href="agents/eval.html"><strong aria-hidden="true">11.</strong> Оценка качества агента</a></li><li class="chapter-item expanded affix "><li class="part-title">Fine Tuning (13.04 - 27.04)</li><li class="chapter-item expanded "><a href="fineTuning/fineTuning.html"><strong aria-hidden="true">12.</strong> Fine Tuning</a></li><li class="chapter-item expanded affix "><li class="part-title">Data Engineering (20.04 - 04.05)</li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">13.</strong> Подготовка данных</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Оценка LLMs (10.03 - 24.03)</li><li class="chapter-item expanded "><a href="evaluateLLMs/decompose.html"><strong aria-hidden="true">1.</strong> Декомпозиция AI-системы для оценки</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion.html"><strong aria-hidden="true">2.</strong> Критерии оценки AI-систем</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/criterion_methods.html"><strong aria-hidden="true">3.</strong> Подходы для оценки критериев</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/error_analysis.html"><strong aria-hidden="true">4.</strong> Итерации и анализ ошибок</a></li><li class="chapter-item expanded "><a href="evaluateLLMs/llm_choice.html"><strong aria-hidden="true">5.</strong> Выбор модели для AI-систем</a></li><li class="chapter-item expanded affix "><li class="part-title">Prompt Engineering (18.03 - 01.04)</li><li class="chapter-item expanded "><a href="promptEngineering/basicPrompt.html"><strong aria-hidden="true">6.</strong> Проектирование базового промпта</a></li><li class="chapter-item expanded "><a href="promptEngineering/security.html"><strong aria-hidden="true">7.</strong> Защита от атак</a></li><li class="chapter-item expanded affix "><li class="part-title">RAG (23.03 - 06.04)</li><li class="chapter-item expanded "><a href="rag/intro.html"><strong aria-hidden="true">8.</strong> Введение в RAG</a></li><li class="chapter-item expanded "><a href="rag/retriever_quality.html"><strong aria-hidden="true">9.</strong> Оценка качества ретривера</a></li><li class="chapter-item expanded affix "><li class="part-title">Agents (30.03 - 13.04)</li><li class="chapter-item expanded "><a href="agents/tools.html"><strong aria-hidden="true">10.</strong> Выбор Инструментов</a></li><li class="chapter-item expanded "><a href="agents/eval.html"><strong aria-hidden="true">11.</strong> Оценка качества агента</a></li><li class="chapter-item expanded affix "><li class="part-title">Fine Tuning (13.04 - 27.04)</li><li class="chapter-item expanded "><a href="fineTuning/fineTuning.html"><strong aria-hidden="true">12.</strong> Fine Tuning</a></li><li class="chapter-item expanded affix "><li class="part-title">Data Engineering (20.04 - 04.05)</li><li class="chapter-item expanded "><a href="data/data.html"><strong aria-hidden="true">13.</strong> Подготовка данных</a></li><li class="chapter-item expanded affix "><li class="part-title">Оптимизация инференса (27.04 - 11.05)</li><li class="chapter-item expanded "><a href="inference/inference.html"><strong aria-hidden="true">14.</strong> Подготовка данных</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -2207,7 +2207,156 @@ Happy path:</p>
 <tr><td>(A2)</td><td>0.05</td><td>8</td><td>0.0444</td></tr>
 <tr><td>-</td><td>-</td><td></td><td>-</td></tr>
 </tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="Артефакт---Оптимизация-инференса"><a class="header" href="#Артефакт---Оптимизация-инференса">Артефакт - Оптимизация инференса</a></h1>
+<p><em>Примечанияe: ссылки на источники с данными указаны в [x], сами источники в конце этого документа</em></p>
+<h2 id="Сравнение-ускорителей-по-базовым-характеристика"><a class="header" href="#Сравнение-ускорителей-по-базовым-характеристика">Сравнение ускорителей по базовым характеристика</a></h2>
+<p>В качестве ускорителя для игр или посведневных задач выбран - NVIDIA Geforce RTX 4090 [1].
+В качестве ускорителя для специализировнной работы с AI - AMD Instinct MI300X [2].</p>
+<div class="table-wrapper"><table><thead><tr><th>Характеристика</th><th>NVIDIA Geforce RTX 4090</th><th>AMD Instinct MI300X</th></tr></thead><tbody>
+<tr><td>FP32, TFLOPs</td><td>82.6</td><td>163.4</td></tr>
+<tr><td>TF32, TFLOPs</td><td>165.2</td><td>1307.4</td></tr>
+<tr><td>BFLOAT16/FP16, TFLOPs</td><td>660.6</td><td>2614.9</td></tr>
+<tr><td>INT8, TOPs</td><td>1321.2</td><td>5229.8</td></tr>
+<tr><td>Объем памяти, GB</td><td>24</td><td>192</td></tr>
+<tr><td>Пропускная способность памяти, TB/s</td><td>1.01</td><td>5.3</td></tr>
+<tr><td>Пиковая мощность, W</td><td>450</td><td>750</td></tr>
+<tr><td>Расчетная тепловая мощность, W</td><td>315</td><td>не указано</td></tr>
+</tbody></table>
 </div>
+<h2 id="Размещения-моделей-типа-qwen35"><a class="header" href="#Размещения-моделей-типа-qwen35">Размещения моделей типа qwen3.5</a></h2>
+<p>Отдельно рассотрим рассчеты для моделей Qwen3.5</p>
+<h3 id="Подход-к-расчетам-kv-кеша"><a class="header" href="#Подход-к-расчетам-kv-кеша">Подход к расчетам KV-кеша</a></h3>
+<p>Поскольку у qwen3.5 моделей гибридная архитектура, определим формулу расчета kv-кеша и покажем ее корректность.
+За основу возьмем формулу для вычисление размера одного параметра из источника [3], представленного в конспекте по инференсу:</p>
+<blockquote>
+<p>2 * layers * heads * head_dim * kv_param_weight</p>
+</blockquote>
+<p>Определим переменные, как:</p>
+<ol>
+<li>2 - число матриц (K и V)</li>
+<li>layers - число attention слоев</li>
+<li>heads - число голов для KV в attention слое</li>
+<li>head_dim - размерность головы</li>
+<li>kv_param_weight - вес параметра kv-кеша, байт (в [3] = 2 байт)</li>
+</ol>
+<p>Соотвественно для заданного контекст context, размер KV-кеша:</p>
+<blockquote>
+<p>2 * layers * heads * head_dim * kv_param_weight * context</p>
+</blockquote>
+<h4 id="Предположение"><a class="header" href="#Предположение">Предположение</a></h4>
+<p>Пусть есть модель qwen3.5-2b, для которой layers = 6, heads = 2, head_dim = 256, kv_param_weight = 2
+Для контекстов 8192, 16384:</p>
+<pre><code>2 * 6 * 2 * 256 * 2 * 8192 = 96 MB
+2 * 6 * 2 * 256 * 2 * 16384 = 192 MB
+</code></pre>
+<h4 id="Проверка-через-llamacpp"><a class="header" href="#Проверка-через-llamacpp">Проверка через llama.cpp</a></h4>
+<p>Выполним запуск с контекстом 8192:</p>
+<blockquote>
+<p>llama-server -m &quot;.\Qwen3.5-2B-BF16.gguf&quot; -c 8192</p>
+</blockquote>
+<p>В выводе увидим:</p>
+<pre><code>llama_kv_cache:      CUDA0 KV buffer size =    96.00 MiB
+llama_kv_cache: size =   96.00 MiB (  8192 cells,   6 layers,  4/1 seqs), K (f16):   48.00 MiB, V (f16):   48.00 MiB
+llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 256
+llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 256
+</code></pre>
+<p>Выполним запуск с контекстом 16384:</p>
+<blockquote>
+<p>llama-server -m &quot;.\Qwen3.5-2B-BF16.gguf&quot; -c 16384</p>
+</blockquote>
+<p>В выводе увидим:</p>
+<pre><code>llama_kv_cache:      CUDA0 KV buffer size =   192.00 MiB
+llama_kv_cache: size =  192.00 MiB ( 16384 cells,   6 layers,  4/1 seqs), K (f16):   96.00 MiB, V (f16):   96.00 MiB
+llama_kv_cache: attn_rot_k = 0, n_embd_head_k_all = 256
+llama_kv_cache: attn_rot_v = 0, n_embd_head_k_all = 256
+</code></pre>
+<p><strong>Результаты сошлись, чтд.</strong></p>
+<h3 id="Подход-к-расчетам-для-модели"><a class="header" href="#Подход-к-расчетам-для-модели">Подход к расчетам для модели</a></h3>
+<p>Воспользуемся формулой из конспекта по инференсу и истоника [4]:</p>
+<blockquote>
+<p>1.2 * params * param_weight</p>
+</blockquote>
+<p>Определим переменные, как:</p>
+<ol>
+<li>1.2 - допущение для активаций и key-value векторов у attention-механизма</li>
+<li>params - число параметров модели (K и V)</li>
+<li>param_weight - вес параметра модели, байт </li>
+</ol>
+<h3 id="Рассчеты-вместимости-моделей"><a class="header" href="#Рассчеты-вместимости-моделей">Рассчеты вместимости моделей</a></h3>
+<h4 id="Без-квантования"><a class="header" href="#Без-квантования">Без квантования</a></h4>
+<ul>
+<li>Вес параметра модели (байт): 2</li>
+<li>Вес параметра KV-кеша (байт): 2</li>
+<li>Контекст: 128 000</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>Модель</th><th>params</th><th>layers</th><th>heads</th><th>head_dim</th><th>Память на модель, GB</th><th>Память на KV-кеш, GB</th><th>Итого, GB</th></tr></thead><tbody>
+<tr><td>Qwen3.5-0.8B</td><td>8.00e+08</td><td>6</td><td>2</td><td>256</td><td>1.79</td><td>1.46</td><td>3.25</td></tr>
+<tr><td>Qwen3.5-2B</td><td>2.00e+09</td><td>6</td><td>2</td><td>256</td><td>4.47</td><td>1.46</td><td>5.94</td></tr>
+<tr><td>Qwen3.5-4B</td><td>4.00e+09</td><td>8</td><td>4</td><td>256</td><td>8.94</td><td>3.91</td><td>12.85</td></tr>
+<tr><td>Qwen3.5-9B</td><td>9.00e+09</td><td>8</td><td>4</td><td>256</td><td>20.12</td><td>3.91</td><td>24.02</td></tr>
+<tr><td>Qwen3.5-27B</td><td>2.70e+10</td><td>16</td><td>4</td><td>256</td><td>60.35</td><td>7.81</td><td>68.16</td></tr>
+<tr><td>Qwen3.5-35B-A3B</td><td>3.50e+10</td><td>10</td><td>2</td><td>256</td><td>78.23</td><td>2.44</td><td>80.67</td></tr>
+<tr><td>Qwen3.5-122B-A10B</td><td>1.22e+11</td><td>12</td><td>2</td><td>256</td><td>272.69</td><td>2.93</td><td>275.62</td></tr>
+<tr><td>Qwen3.5-397B-A17B</td><td>3.97e+11</td><td>15</td><td>2</td><td>256</td><td>887.36</td><td>3.66</td><td>891.03</td></tr>
+</tbody></table>
+</div>
+<p>Исходя из данной таблицы:</p>
+<ol>
+<li>на AMD Instinct MI300X поместится Qwen3.5-35B-A3B</li>
+<li>на NVIDIA Geforce RTX 4090 точно поместится Qwen3.5-4B. (eсли параметр KV-кеша представить 1 байтом, то может поместится Qwen3.5-9B: 20.12 + 3.91/2 = 22.78 (GB))</li>
+</ol>
+<h4 id="8bit-кватнование"><a class="header" href="#8bit-кватнование">8bit-кватнование</a></h4>
+<ul>
+<li>Вес параметра модели (байт): 1</li>
+<li>Вес параметра KV-кеша (байт): 2</li>
+<li>Контекст: 128 000</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>Модель</th><th>params</th><th>layers</th><th>heads</th><th>head_dim</th><th>Память на модель, GB</th><th>Память на KV-кеш, GB</th><th>Итого, GB</th></tr></thead><tbody>
+<tr><td>Qwen3.5-0.8B</td><td>8.00e+08</td><td>6</td><td>2</td><td>256</td><td>0.89</td><td>1.46</td><td>2.36</td></tr>
+<tr><td>Qwen3.5-2B</td><td>2.00e+09</td><td>6</td><td>2</td><td>256</td><td>2.24</td><td>1.46</td><td>3.70</td></tr>
+<tr><td>Qwen3.5-4B</td><td>4.00e+09</td><td>8</td><td>4</td><td>256</td><td>4.47</td><td>3.91</td><td>8.38</td></tr>
+<tr><td>Qwen3.5-9B</td><td>9.00e+09</td><td>8</td><td>4</td><td>256</td><td>10.06</td><td>3.91</td><td>13.96</td></tr>
+<tr><td>Qwen3.5-27B</td><td>2.70e+10</td><td>16</td><td>4</td><td>256</td><td>30.17</td><td>7.81</td><td>37.99</td></tr>
+<tr><td>Qwen3.5-35B-A3B</td><td>3.50e+10</td><td>10</td><td>2</td><td>256</td><td>39.12</td><td>2.44</td><td>41.56</td></tr>
+<tr><td>Qwen3.5-122B-A10B</td><td>1.22e+11</td><td>12</td><td>2</td><td>256</td><td>136.35</td><td>2.93</td><td>139.28</td></tr>
+<tr><td>Qwen3.5-397B-A17B</td><td>3.97e+11</td><td>15</td><td>2</td><td>256</td><td>443.68</td><td>3.66</td><td>447.34</td></tr>
+</tbody></table>
+</div>
+<p>Исходя из данной таблицы:</p>
+<ol>
+<li>на AMD Instinct MI300X поместится Qwen3.5-122B-A10B</li>
+<li>на NVIDIA Geforce RTX 4090 поместится Qwen3.5-9B</li>
+</ol>
+<h4 id="4bit-кватнование"><a class="header" href="#4bit-кватнование">4bit-кватнование</a></h4>
+<ul>
+<li>Вес параметра модели (байт): 0.5</li>
+<li>Вес параметра KV-кеша (байт): 2</li>
+<li>Контекст: 128 000</li>
+</ul>
+<div class="table-wrapper"><table><thead><tr><th>Модель</th><th>params</th><th>layers</th><th>heads</th><th>head_dim</th><th>Память на модель, GB</th><th>Память на KV-кеш, GB</th><th>Итого, GB</th></tr></thead><tbody>
+<tr><td>Qwen3.5-0.8B</td><td>8.00e+08</td><td>6</td><td>2</td><td>256</td><td>0.45</td><td>1.46</td><td>1.91</td></tr>
+<tr><td>Qwen3.5-2B</td><td>2.00e+09</td><td>6</td><td>2</td><td>256</td><td>1.12</td><td>1.46</td><td>2.58</td></tr>
+<tr><td>Qwen3.5-4B</td><td>4.00e+09</td><td>8</td><td>4</td><td>256</td><td>2.24</td><td>3.91</td><td>6.14</td></tr>
+<tr><td>Qwen3.5-9B</td><td>9.00e+09</td><td>8</td><td>4</td><td>256</td><td>5.03</td><td>3.91</td><td>8.94</td></tr>
+<tr><td>Qwen3.5-27B</td><td>2.70e+10</td><td>16</td><td>4</td><td>256</td><td>15.09</td><td>7.81</td><td>22.90</td></tr>
+<tr><td>Qwen3.5-35B-A3B</td><td>3.50e+10</td><td>10</td><td>2</td><td>256</td><td>19.56</td><td>2.44</td><td>22.00</td></tr>
+<tr><td>Qwen3.5-122B-A10B</td><td>1.22e+11</td><td>12</td><td>2</td><td>256</td><td>68.17</td><td>2.93</td><td>71.10</td></tr>
+<tr><td>Qwen3.5-397B-A17B</td><td>3.97e+11</td><td>15</td><td>2</td><td>256</td><td>221.84</td><td>3.66</td><td>225.50</td></tr>
+</tbody></table>
+</div>
+<p>Исходя из данной таблицы:</p>
+<ol>
+<li>на AMD Instinct MI300X поместится Qwen3.5-122B-A10B</li>
+<li>на NVIDIA Geforce RTX 4090 поместятся Qwen3.5-27B или Qwen3.5-35B-A3B</li>
+</ol>
+<h2 id="Источники"><a class="header" href="#Источники">Источники</a></h2>
+<ol>
+<li><a href="https://images.nvidia.com/aem-dam/Solutions/geforce/ada/nvidia-ada-gpu-architecture.pdf">NVIDIA ADA GPU ARCHITECTURE - Appendix A - GeForce RTX 4090 Full Specifications</a></li>
+<li><a href="https://www.amd.com/en/products/accelerators/instinct/mi300/mi300x.html?utm_source=chatgpt.com#tabs-afd6e3cf32-item-f0ac535dca-tab">AMD Instinct MI300X Accelerators</a></li>
+<li><a href="https://kipp.ly/p/transformer-inference-arithmetic">Transformer Inference Arithmetic</a></li>
+<li><a href="https://blog.eleuther.ai/transformer-math/">Transformer Math 101</a></li>
+</ol>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
