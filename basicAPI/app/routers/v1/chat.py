@@ -1,6 +1,6 @@
 from app.schemas.chat import ChatCompletions
 from app.services.service import Service
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter(prefix="/chat")
 
@@ -12,4 +12,5 @@ def completions(
         response = Service.get_services().langgraph_service.run(completions)
         return response
     except Exception as e:
-        return {"status": 500, "message": e}
+        print(e)
+        raise HTTPException(500, "Unexpected Error")

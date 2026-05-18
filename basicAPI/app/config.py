@@ -7,15 +7,16 @@ class Settings(BaseSettings):
     advice_prompt: str
     other_prompt: str
     recipe_prompt: str
+    search_recipe_prompt: str
+    search_advice_prompt: str
 
-    build_recipe: str
-    collect_recipe: str
+    classify_prompt: str
 
     recipe_docs: str
+    advice_docs: str
 
     sqlite_db: str
-    recipe_faiss: str
-
+    chroma_db: str
 
     model_config = SettingsConfigDict(
         env_file=".env",

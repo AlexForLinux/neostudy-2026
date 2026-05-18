@@ -7,3 +7,9 @@ langgraph
 sentence-transformers
 ddgs
 trafilatura
+
+
+langchain
+langchain-chroma
+langchain-huggingface
+chromadb

@@ -5,6 +5,9 @@ class Message(TypedDict):
     role: Annotated[str | None, Field(default='user', description='role')]
     content: Annotated[str, Field(..., description='user request')]
 
+class ToolMessage(Message):
+    tool_call_id:  Annotated[str, Field(..., description='tool call id')]
+
 class ChatCompletions(BaseModel):
     model: Annotated[
         Literal["gpt-oss-120b", "qwen-3-235b-a22b-instruct-2507"],

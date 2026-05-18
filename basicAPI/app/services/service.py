@@ -3,9 +3,19 @@ from .prompt_service import PromptService
 from .recipe_retriever_service import RecipeRetrieverService
 from .langgraph_service import LanggraphService
 from .agentic_service import AgenticService
-from app.repo.recipe_repo import RecipeRepo
+
 from app.config import settings
 from sentence_transformers import SentenceTransformer
+
+from app.services.chroma_retriever_service import ChromaRetrieverService
+from app.schemas.local_recipe import LocalRecipe
+from app.schemas.local_advice import LocalAdvice
+from app.repo.retriever_repo_protocol import ReadableRepo
+from app.repo.recipe_readable_repo import RecipeReadbleRepo
+from app.repo.advice_readable_repo import AdviceReadbleRepo
+from app.services.generation_service import GenerationService
+from app.services.classifier_service import ClassifierService
+from app.services.search_agent_service import SearchAgentService
 
 class Service:
 
@@ -18,26 +28,51 @@ class Service:
         return cls.services
 
     def __init__(self):
-        self.gpt_service = GPTService()
+        self.gen_service = GenerationService()
+
+        self.classifier_service = ClassifierService()
+
         self.prompt_service = PromptService({
             'recipe': settings.recipe_prompt,
             'advice': settings.advice_prompt,
             'other': settings.other_prompt,
-            'collect_recipe': settings.collect_recipe,
-            'build_recipe': settings.build_recipe
+            'search-recipe': settings.search_recipe_prompt,
+            'search-advice': settings.search_advice_prompt
         })
 
-        self.__recipeRepo = RecipeRepo(settings.sqlite_db, settings.recipe_docs)
-        self.recipe_retriever_service = RecipeRetrieverService(
-            settings.recipe_faiss,
-            SentenceTransformer("BAAI/bge-m3"),
-            self.__recipeRepo
+        self.__recipe_repo : ReadableRepo = RecipeReadbleRepo(
+            settings.sqlite_db, 
+            settings.recipe_docs,
         )
+
+        self.__advice_repo : ReadableRepo = AdviceReadbleRepo(
+            settings.sqlite_db,
+            settings.advice_docs,
+        )
+
+        embed_model = SentenceTransformer("BAAI/bge-m3")
+        
+        self.recipe_retriever_service = ChromaRetrieverService[LocalRecipe](
+            'recipes',
+            settings.chroma_db,
+            self.__recipe_repo,
+            embed_model
+        )
+
+        self.advice_retriever_service = ChromaRetrieverService[LocalAdvice](
+            'advice',
+            settings.chroma_db,
+            self.__advice_repo,
+            embed_model
+        )
+
+        self.search_agent_service = SearchAgentService(self.gen_service)
 
         self.langgraph_service = LanggraphService(
+            self.classifier_service,
             self.prompt_service, 
             self.recipe_retriever_service, 
-            self.gpt_service
+            self.advice_retriever_service,
+            self.search_agent_service,
+            self.gen_service
         )
-
-        self.agentic_service = AgenticService(self.recipe_retriever_service, self.prompt_service)

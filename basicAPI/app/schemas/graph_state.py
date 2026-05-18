@@ -5,6 +5,5 @@ from app.schemas.chat import ChatCompletions
 class MysticState(TypedDict):
     chat_story: ChatCompletions
     user_intention: Intention
-    system_prompt: str
-    context: List[str]
+    context: str
     message: str
