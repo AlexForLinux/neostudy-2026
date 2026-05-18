@@ -27,7 +27,7 @@ class Ingredient(BaseModel):
         ..., 
         description="Product info"
     )]
-    amount: Annotated[float, Gt(0), Field(
+    amount: Annotated[float, Ge(0), Field(
         ...,
         description="Required amount of the product"
     )]
@@ -45,7 +45,7 @@ class Step(BaseModel):
         ..., 
         description="Detailed instruction for the cooking step"
     )]
-    duration: Annotated[float | None, Gt(0), Field(
+    duration: Annotated[float | None, Ge(0), Field(
         default = None,
         description = "Approximate duration of the step in minutes"
     )]
