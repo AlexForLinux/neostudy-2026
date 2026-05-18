@@ -1,6 +1,7 @@
 from app.schemas.intention import Intention
 import random
 
+#TODO: в процессе
 class ClassifierService:
     def classify(self, query: str) -> Intention:
         mp =  {
