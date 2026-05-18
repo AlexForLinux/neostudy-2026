@@ -90,7 +90,7 @@ class SearchAgentService:
                 step -= 1
                 break
 
-            message = self.__gen_service.tool_gen(chat, self.__tools_desc)
+            message = self.__gen_service.get_tool_call(chat, self.__tools_desc)
             msg = message.model_dump()
 
             print("STEP", step, msg)
@@ -130,8 +130,6 @@ class SearchAgentService:
                             content=result if error is None else error, 
                             tool_call_id=call.id
                         ))
-
-        print("TOOLS", tool_calls)
 
         return {
             "tool_calling": tool_calls,

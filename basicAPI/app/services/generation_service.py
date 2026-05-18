@@ -15,17 +15,18 @@ class GenerationService:
             model=data.model,
             messages=data.messages,
             tools=tools,
-            tool_choice="auto",
+            tool_choice="auto"
         )
 
         return response.choices[0].message
 
-    def ask_llm(self, data: ChatCompletions):
+    @observe()
+    def get_structured(self, data: ChatCompletions, schema):
         response = self.__client.chat.completions.parse(
             model = data.model,
             messages = data.messages,
             temperature = data.temperature,
-            response_format=Recipe,
+            response_format=schema,
             max_completion_tokens=20000
         )
 

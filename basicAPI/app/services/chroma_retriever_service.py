@@ -44,8 +44,6 @@ class ChromaRetrieverService(Generic[T]):
 
         if not data:
             return True
-        
-        print(len(data.get("ids", [])))
 
         return len(data.get("ids", [])) == 0
 
@@ -91,8 +89,6 @@ class ChromaRetrieverService(Generic[T]):
         id_score_mapping = {int(doc.id): score for doc, score in results}
         doc_ids = tuple(id_score_mapping.keys())
         full_docs = self.__readable_repo.get_by_ids(doc_ids)
-
-        print(full_docs)
 
         retrieved_data  = [
             (full_doc.id, id_score_mapping[full_doc.id], full_doc.data) for full_doc in full_docs

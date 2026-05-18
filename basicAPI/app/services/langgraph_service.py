@@ -10,6 +10,8 @@ from app.services.classifier_service import ClassifierService
 from app.schemas.chat import Message
 import json
 import random
+from app.schemas.recipe import Recipe
+from app.schemas.advice import Advice
 
 class LanggraphService:
     def __init__(self, classifier_service, prompt_service, recipe_retriever_service, advice_retriever_service, search_agent, gen_service):
@@ -98,8 +100,6 @@ class LanggraphService:
         search_results = self.__search_agent.run(chat)
 
         chat.messages = search_results["messages"]
-        print(len(chat.messages))
-
         return {"chat_story": chat}
     
     def _select_prompt(self, state: MysticState) -> dict:
@@ -116,20 +116,25 @@ class LanggraphService:
 
         chat = state['chat_story']
         intention = state['user_intention']
+        schema = None
 
         if intention == Intention.OTHER:
-            return {"message": "No"}
+            system_prompt = self.__prompt_service.other_prompt
+            chat.messages.insert(0, {"role": "system", "content": system_prompt})
+            result = self.__gen_service.get_common(chat)
+            return {"message": result}
+        
         elif intention == Intention.RECIPE:
             system_prompt = self.__prompt_service.recipe_prompt
+            schema = Recipe
         else:
             system_prompt = self.__prompt_service.advice_prompt
+            schema = Advice
 
         context = state['context']
-
         system_prompt = system_prompt.replace("<context>[CONTEXT]</context>", context)
 
         chat.messages.insert(0, {"role": "system", "content": system_prompt})
-
-        result = self.__gen_service.ask_llm(chat)
+        result = self.__gen_service.get_structured(chat, schema=schema)
 
         return {"message": result}
