@@ -10,7 +10,7 @@ class GenerationService:
             api_key=settings.api_key
         )
 
-    def tool_gen(self, data: ChatCompletions, tools):
+    def get_tool_call(self, data: ChatCompletions, tools):
         response = self.__client.chat.completions.create(
             model=data.model,
             messages=data.messages,
@@ -19,6 +19,15 @@ class GenerationService:
         )
 
         return response.choices[0].message
+    def get_common(self, data: ChatCompletions):
+        response = self.__client.chat.completions.parse(
+            model = data.model,
+            messages = data.messages,
+            temperature = data.temperature,
+            max_completion_tokens=20000
+        )
+
+        return response.choices[0].message.content
 
     @observe()
     def get_structured(self, data: ChatCompletions, schema):
