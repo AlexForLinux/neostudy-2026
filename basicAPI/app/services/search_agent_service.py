@@ -5,6 +5,7 @@ from app.services.generation_service import GenerationService
 from ..schemas.tools import WebSearchTool, UrlReaderTool, FinishTool
 from pydantic import ValidationError
 from app.schemas.chat import ChatCompletions, Message, ToolMessage
+from langfuse import observe
 
 class SearchAgentService:
     def __init__(self, gen_service: GenerationService):
@@ -74,6 +75,7 @@ class SearchAgentService:
             
         return content[:max_length]
     
+    @observe()
     def run(self, chat: ChatCompletions, max_steps=8):
         
         messages = chat.messages
