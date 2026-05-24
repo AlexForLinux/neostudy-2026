@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     search_advice_prompt: str
 
     classify_prompt: str
+    classifier: str
 
     recipe_docs: str
     advice_docs: str

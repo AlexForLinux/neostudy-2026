@@ -3,6 +3,7 @@ book
 extras
 
 data_gen/settings/env.json
+docker/.env
 
 basicAPI/system_prompts
 basicAPI/data

@@ -5,7 +5,7 @@ from app.services.generation_service import GenerationService
 from ..schemas.tools import WebSearchTool, UrlReaderTool, FinishTool
 from pydantic import ValidationError
 from app.schemas.chat import ChatCompletions, Message, ToolMessage
-from langfuse import observe
+# from langfuse import observe
 
 class SearchAgentService:
     def __init__(self, gen_service: GenerationService):
@@ -75,11 +75,10 @@ class SearchAgentService:
             
         return content[:max_length]
     
-    @observe()
+    # @observe()
     def run(self, chat: ChatCompletions, max_steps=8):
         
         messages = chat.messages
-        print("START", chat.messages)
 
         step = 0
         flag = True
@@ -94,8 +93,6 @@ class SearchAgentService:
 
             message = self.__gen_service.get_tool_call(chat, self.__tools_desc)
             msg = message.model_dump()
-
-            print("STEP", step, msg)
             
             msg.pop('reasoning_content', None)
             msg.pop('provider_specific_fields', None)

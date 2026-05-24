@@ -1,15 +1,56 @@
 from app.schemas.intention import Intention
 import random
-from langfuse import observe
+# from langfuse import observe
+from app.config import settings
 
-#TODO: в процессе
+import torch
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification
+)
+
 class ClassifierService:
 
-    @observe()
+    def __init__(self):
+        self.__device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+        self.__tokenizer = AutoTokenizer.from_pretrained(settings.classifier)
+
+        model = AutoModelForSequenceClassification.from_pretrained(settings.classifier)
+        model.to(self.__device)
+        model.eval()
+
+        self.__model = model
+
+    # @observe()
     def classify(self, query: str) -> Intention:
+
+        inputs = self.__tokenizer(
+            query,
+            return_tensors="pt",
+            truncation=True,
+            padding=True,
+            max_length=128
+        )
+
+        inputs = {
+            k: v.to(self.__device)
+            for k, v in inputs.items()
+        }
+
+        with torch.no_grad():
+            outputs = self.__model(**inputs)
+
+        probs = torch.softmax(outputs.logits, dim=-1)
+
+        pred_id = torch.argmax(probs, dim=-1).item()
+        
         mp =  {
             0: Intention.RECIPE,
             1: Intention.ADVICE,
             2: Intention.OTHER
         }
-        return mp[random.randint(0,2)]
+
+        print(query, mp[pred_id])
+
+        return mp[pred_id]
