@@ -10,8 +10,8 @@ class Settings(BaseSettings):
     search_recipe_prompt: str
     search_advice_prompt: str
 
-    classify_prompt: str
     classifier: str
+    embeder: str
 
     recipe_docs: str
     advice_docs: str
@@ -19,9 +19,12 @@ class Settings(BaseSettings):
     sqlite_db: str
     chroma_db: str
 
-    langfuse_public_key: str
-    langfuse_secret_key: str
-    langfuse_base_url: str = "http://localhost:3000"
+    redis_host: str
+    redis_port: int
+
+    # langfuse_public_key: str
+    # langfuse_secret_key: str
+    # langfuse_base_url: str = "http://localhost:3000"
 
     model_config = SettingsConfigDict(
         env_file=".env",

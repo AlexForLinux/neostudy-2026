@@ -5,8 +5,8 @@ extras
 data_gen/settings/env.json
 docker/.env
 
-basicAPI/system_prompts
-basicAPI/data
+basicAPI/app/system_prompts
+basicAPI/app/data
 basicAPI/tests/eval_retriever/0/data/recipes
 basicAPI/tests/eval_retriever/0/data/faiss_test.db
 basicAPI/tests/eval_retriever/0/data/sqlite_test.db
