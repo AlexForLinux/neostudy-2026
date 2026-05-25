@@ -1,5 +1,9 @@
-fastapi
-uvicorn
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+pydantic>=2.0.0
+locust>=2.32.0
+Pillow>=11.0.0
+
 pydantic-settings
 python-dotenv
 openai
@@ -7,7 +11,6 @@ langgraph
 sentence-transformers
 ddgs
 trafilatura
-
 
 langchain
 langchain-chroma
@@ -19,3 +22,5 @@ litellm
 
 torch
 transformers
+
+redis
