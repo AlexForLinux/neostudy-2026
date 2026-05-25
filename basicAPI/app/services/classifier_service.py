@@ -11,16 +11,14 @@ from transformers import (
 
 class ClassifierService:
 
-    def __init__(self):
+    def __init__(self, tokenizer, classifier):
         self.__device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-        self.__tokenizer = AutoTokenizer.from_pretrained(settings.classifier)
+        self.__tokenizer = tokenizer
 
-        model = AutoModelForSequenceClassification.from_pretrained(settings.classifier)
-        model.to(self.__device)
-        model.eval()
-
-        self.__model = model
+        classifier.to(self.__device)
+        classifier.eval()
+        self.__model = classifier
 
     # @observe()
     def classify(self, query: str) -> Intention:

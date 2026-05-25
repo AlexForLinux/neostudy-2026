@@ -1,11 +1,13 @@
-from .gpt_service import GPTService
+
 from .prompt_service import PromptService
-from .recipe_retriever_service import RecipeRetrieverService
 from .langgraph_service import LanggraphService
-from .agentic_service import AgenticService
 
 from app.config import settings
 from sentence_transformers import SentenceTransformer
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification
+)
 
 from app.services.chroma_retriever_service import ChromaRetrieverService
 from app.schemas.local_recipe import LocalRecipe
@@ -28,9 +30,14 @@ class Service:
         return cls.services
 
     def __init__(self):
+
+        tokenizer = AutoTokenizer.from_pretrained(settings.classifier)
+        classifier = AutoModelForSequenceClassification.from_pretrained(settings.classifier)
+        embed_model = SentenceTransformer(settings.embeder)
+
         self.gen_service = GenerationService()
 
-        self.classifier_service = ClassifierService()
+        self.classifier_service = ClassifierService(tokenizer, classifier)
 
         self.prompt_service = PromptService({
             'recipe': settings.recipe_prompt,
@@ -49,8 +56,6 @@ class Service:
             settings.sqlite_db,
             settings.advice_docs,
         )
-
-        embed_model = SentenceTransformer("BAAI/bge-m3")
         
         self.recipe_retriever_service = ChromaRetrieverService[LocalRecipe](
             'recipes',

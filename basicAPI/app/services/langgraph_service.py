@@ -9,9 +9,11 @@ from app.services.search_agent_service import SearchAgentService
 from app.services.classifier_service import ClassifierService
 from app.schemas.chat import Message
 import json
-import random
 from app.schemas.recipe import Recipe
 from app.schemas.advice import Advice
+from app.config import settings
+import redis
+import hashlib
 
 class LanggraphService:
     def __init__(self, classifier_service, prompt_service, recipe_retriever_service, advice_retriever_service, search_agent, gen_service):
@@ -22,6 +24,8 @@ class LanggraphService:
         self.__advice_retriever_service : ChromaRetrieverService = advice_retriever_service
         self.__search_agent : SearchAgentService = search_agent
         self.__gen_service : GenerationService = gen_service
+
+        self.__redis = redis.Redis(host=settings.redis_host, port=settings.redis_port)
 
         graph = StateGraph(MysticState)
 
@@ -53,10 +57,29 @@ class LanggraphService:
         self.__worker = graph.compile()
 
     def run(self, chat: ChatCompletions) -> str:
-        response = self.__worker.invoke({
+
+        if chat.messages is None or chat.messages[0] is None or chat.messages[0]["content"] is None:
+            raise ValueError("Content is empty")
+        
+        cache_key = f"llm:{hashlib.md5(json.dumps({
+            'model': chat.model,
+            'messages': chat.messages,
+            'temp': chat.temperature
+        }, sort_keys=True).encode()).hexdigest()}"
+
+        cached = self.__redis.get(cache_key)
+        if cached:
+            return json.loads(cached)
+
+        invokation_res = self.__worker.invoke({
             "chat_story": chat
         })
-        return response['message']
+
+        response = invokation_res['message']
+
+        self.__redis.setex(cache_key, 3600, json.dumps(response))
+
+        return response
 
     def _classify_intention(self, state: MysticState) -> dict:
 

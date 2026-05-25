@@ -25,11 +25,12 @@ class GenerationService:
     
     # @observe()
     def get_common(self, data: ChatCompletions):
-        response = self.__client.chat.completions.parse(
+        
+        response = self.__client.chat.completions.create(
             model = data.model,
             messages = data.messages,
             temperature = data.temperature,
-            max_completion_tokens=20000
+            max_tokens=128
         )
 
         return response.choices[0].message.content
@@ -41,7 +42,7 @@ class GenerationService:
             messages = data.messages,
             temperature = data.temperature,
             response_format=schema,
-            max_completion_tokens=20000
+            max_tokens=2560
         )
 
-        return response.choices[0].message.parsed
+        return response.choices[0].message.content

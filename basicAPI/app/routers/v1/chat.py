@@ -1,7 +1,7 @@
 from app.schemas.chat import ChatCompletions
 from app.services.service import Service
 from fastapi import APIRouter, HTTPException
-from litellm.exceptions import RateLimitError
+from openai import RateLimitError
 
 router = APIRouter(prefix="/chat")
 
@@ -12,8 +12,9 @@ def completions(
     try:
         response = Service.get_services().langgraph_service.run(completions)
         return response
-    except RateLimitError as rle:
-        raise HTTPException(402)
-    except Exception as e:
-        print(e)
+    except ValueError:
+        raise HTTPException(400, "Invalid Input")
+    except RateLimitError:
+        raise HTTPException(402, "Rate Limit Exceeded")
+    except Exception:
         raise HTTPException(500, "Unexpected Error")

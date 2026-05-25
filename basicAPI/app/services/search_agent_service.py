@@ -76,7 +76,7 @@ class SearchAgentService:
         return content[:max_length]
     
     # @observe()
-    def run(self, chat: ChatCompletions, max_steps=8):
+    def run(self, chat: ChatCompletions, max_steps=4):
         
         messages = chat.messages
 
