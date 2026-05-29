@@ -3,8 +3,8 @@ from langchain_chroma import Chroma
 from langchain_core.embeddings import Embeddings
 from typing import TypeVar, Generic, List, Tuple,  Generator
 from app.repo.retriever_repo_protocol import ReadableRepo
-from app.schemas.identified import Identified
-from app.schemas.summarizable import Summarizable
+from app.my_schemas.identified import Identified
+from app.my_schemas.summarizable import Summarizable
 
 class EmbeddingAdapter(Embeddings):
     def __init__(self, embed_model):

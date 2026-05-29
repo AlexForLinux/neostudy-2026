@@ -1,16 +1,16 @@
 from langgraph.graph import StateGraph, START, END
-from app.schemas.graph_state import MysticState
-from app.schemas.intention import Intention
-from app.schemas.chat import ChatCompletions
+from app.my_schemas.graph_state import MysticState
+from app.my_schemas.intention import Intention
+from app.my_schemas.chat import ChatCompletions
 from app.services.chroma_retriever_service import ChromaRetrieverService
 from app.services.prompt_service import  PromptService
 from app.services.generation_service import GenerationService
 from app.services.search_agent_service import SearchAgentService
 from app.services.classifier_service import ClassifierService
-from app.schemas.chat import Message
+from app.my_schemas.chat import Message
 import json
-from app.schemas.recipe import Recipe
-from app.schemas.advice import Advice
+from app.my_schemas.recipe import Recipe
+from app.my_schemas.advice import Advice
 from app.config import settings
 import redis
 import hashlib
@@ -32,9 +32,9 @@ class LanggraphService:
         graph.add_node("main_router", self._classify_intention)
         graph.add_node("advice_retriever", self._retrieve_with_advice)
         graph.add_node("recipe_retriever", self._retrieve_with_recipes)
-        # graph.add_node("select_prompt", self._select_prompt)
         graph.add_node("search_agent", self._search)
         graph.add_node("llm_answer", self._generate_answer)
+        graph.add_node("llm_simple_answer", self._generate_simple_answer)
 
         graph.add_edge(START, "main_router")
         graph.add_conditional_edges(
@@ -43,15 +43,14 @@ class LanggraphService:
             {
                 Intention.RECIPE: "recipe_retriever", 
                 Intention.ADVICE: "advice_retriever",
-                Intention.OTHER: "llm_answer"
+                Intention.OTHER: "llm_simple_answer"
             }
         )
-        # graph.add_edge("recipe_retriever", "select_prompt")
-        # graph.add_edge("advice_retriever", "select_prompt")
         graph.add_edge("recipe_retriever", "search_agent")
         graph.add_edge("advice_retriever", "search_agent")
 
         graph.add_edge("search_agent", "llm_answer")
+        graph.add_edge("llm_simple_answer", END)
         graph.add_edge("llm_answer", END)
 
         self.__worker = graph.compile()
@@ -160,4 +159,13 @@ class LanggraphService:
         chat.messages.insert(0, {"role": "system", "content": system_prompt})
         result = self.__gen_service.get_structured(chat, schema=schema)
 
+        return {"message": result}
+    
+    def _generate_simple_answer(self, state: MysticState) -> dict:
+
+        chat = state['chat_story']
+        system_prompt = self.__prompt_service.other_prompt
+        chat.messages.insert(0, {"role": "system", "content": system_prompt})
+        
+        result = self.__gen_service.get_common(chat)
         return {"message": result}

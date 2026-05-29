@@ -1,7 +1,7 @@
 from app.config import settings
-from app.schemas.chat import ChatCompletions
-from app.schemas.recipe import Recipe
+from app.my_schemas.chat import ChatCompletions
 from openai import OpenAI
+import torch
 # from langfuse import observe
 # from langfuse.openai import OpenAI
 
@@ -12,7 +12,6 @@ class GenerationService:
             api_key=settings.api_key
         )
 
-    # @observe()
     def get_tool_call(self, data: ChatCompletions, tools):
         response = self.__client.chat.completions.create(
             model=data.model,
@@ -23,9 +22,7 @@ class GenerationService:
 
         return response.choices[0].message
     
-    # @observe()
-    def get_common(self, data: ChatCompletions):
-        
+    def get_common(self, data: ChatCompletions):  
         response = self.__client.chat.completions.create(
             model = data.model,
             messages = data.messages,
@@ -35,7 +32,6 @@ class GenerationService:
 
         return response.choices[0].message.content
 
-    # @observe()
     def get_structured(self, data: ChatCompletions, schema):
         response = self.__client.chat.completions.parse(
             model = data.model,

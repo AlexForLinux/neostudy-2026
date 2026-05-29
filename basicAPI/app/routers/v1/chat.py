@@ -1,4 +1,4 @@
-from app.schemas.chat import ChatCompletions
+from app.my_schemas.chat import ChatCompletions
 from app.services.service import Service
 from fastapi import APIRouter, HTTPException
 from openai import RateLimitError

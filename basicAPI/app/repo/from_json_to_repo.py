@@ -3,7 +3,7 @@ from sqlite3 import Connection
 import json
 import os
 from typing import List, Generator, Tuple, TypeVar, Callable
-from app.schemas.identified import Identified
+from app.my_schemas.identified import Identified
 from pydantic import BaseModel
 
 class FromJson2Repo:

@@ -1,6 +1,6 @@
 from typing import TypedDict, List
 from .intention import Intention
-from app.schemas.chat import ChatCompletions
+from app.my_schemas.chat import ChatCompletions
 
 class MysticState(TypedDict):
     chat_story: ChatCompletions

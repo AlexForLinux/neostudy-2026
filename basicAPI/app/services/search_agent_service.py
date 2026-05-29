@@ -2,9 +2,9 @@ import json
 from ddgs import DDGS
 import trafilatura
 from app.services.generation_service import GenerationService
-from ..schemas.tools import WebSearchTool, UrlReaderTool, FinishTool
+from ..my_schemas.tools import WebSearchTool, UrlReaderTool, FinishTool
 from pydantic import ValidationError
-from app.schemas.chat import ChatCompletions, Message, ToolMessage
+from app.my_schemas.chat import ChatCompletions, Message, ToolMessage
 # from langfuse import observe
 
 class SearchAgentService:

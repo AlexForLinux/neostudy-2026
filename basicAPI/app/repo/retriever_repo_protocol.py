@@ -1,6 +1,6 @@
 from typing import Protocol
 from typing import TypeVar, Generic, Tuple, Generator, List
-from app.schemas.identified import Identified
+from app.my_schemas.identified import Identified
 
 T = TypeVar('T')
 

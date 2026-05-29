@@ -8,7 +8,7 @@ from starlette.responses import Response
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.not_my_schemas import InfoResponse, RunRequest, RunResponse
+from app.schemas import InfoResponse, RunRequest, RunResponse
 from app.service import get_service
 
 app = FastAPI(

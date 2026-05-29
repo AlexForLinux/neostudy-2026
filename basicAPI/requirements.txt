@@ -17,9 +17,6 @@ langchain-chroma
 langchain-huggingface
 chromadb
 
-langfuse
-litellm
-
 torch
 transformers
 

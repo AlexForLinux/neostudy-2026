@@ -1,9 +1,9 @@
 import json
 import os
 from typing import List, Generator, Tuple
-from app.schemas.identified import Identified
+from app.my_schemas.identified import Identified
 from app.repo.from_json_to_repo  import FromJson2Repo
-from app.schemas.local_recipe import LocalRecipe
+from app.my_schemas.local_recipe import LocalRecipe
 
 class RecipeReadbleRepo(FromJson2Repo): #implements ReadableRepo
     def __init__(self, path2db: str, path2json: str):

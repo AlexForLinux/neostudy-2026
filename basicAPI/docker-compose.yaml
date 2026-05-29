@@ -2,42 +2,43 @@ services:
   redis:
     image: redis:8.6-alpine
     container_name: redis
-    # ports:
-    #   - "6379:6379"
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
     restart: unless-stopped
 
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
   api-template:
     build: .
-
+    container_name: pyapi
     ports:
       - "8000:8000"
-
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 30s
       timeout: 5s
       retries: 3
       start_period: 10s
-
     environment:
       - PYTHONUNBUFFERED=1
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-
     env_file:
       - .env
-      
     deploy:
       resources:
         limits:
-          cpus: "4"
-          memory: "4G"
+          cpus: '3'
+          memory: 6G
         reservations:
-          memory: "3G"
-
+          cpus: '2'
+          memory: 3G
 volumes:
   redis_data:
     driver: local

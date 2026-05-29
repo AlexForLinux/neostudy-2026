@@ -6,12 +6,14 @@ from app.config import settings
 from sentence_transformers import SentenceTransformer
 from transformers import (
     AutoTokenizer,
-    AutoModelForSequenceClassification
+    AutoModelForCausalLM,
+    AutoModelForSequenceClassification,
+    pipeline
 )
 
 from app.services.chroma_retriever_service import ChromaRetrieverService
-from app.schemas.local_recipe import LocalRecipe
-from app.schemas.local_advice import LocalAdvice
+from app.my_schemas.local_recipe import LocalRecipe
+from app.my_schemas.local_advice import LocalAdvice
 from app.repo.retriever_repo_protocol import ReadableRepo
 from app.repo.recipe_readable_repo import RecipeReadbleRepo
 from app.repo.advice_readable_repo import AdviceReadbleRepo
@@ -30,14 +32,20 @@ class Service:
         return cls.services
 
     def __init__(self):
+        device = 'cpu'
 
-        tokenizer = AutoTokenizer.from_pretrained(settings.classifier)
-        classifier = AutoModelForSequenceClassification.from_pretrained(settings.classifier)
-        embed_model = SentenceTransformer(settings.embeder)
+        class_pipe = pipeline(
+            "text-classification",
+            model=settings.classifier,
+            tokenizer=settings.classifier,
+            device=device
+        )
+
+        embed_model = SentenceTransformer(settings.embeder, device=device)
 
         self.gen_service = GenerationService()
 
-        self.classifier_service = ClassifierService(tokenizer, classifier)
+        self.classifier_service = ClassifierService(class_pipe)
 
         self.prompt_service = PromptService({
             'recipe': settings.recipe_prompt,

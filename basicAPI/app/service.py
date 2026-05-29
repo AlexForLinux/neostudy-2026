@@ -18,7 +18,7 @@ import io
 from abc import ABC, abstractmethod
 from typing import Any
 
-from app.not_my_schemas import (
+from app.schemas import (
     ContentPartImage,
     ContentPartText,
     InfoResponse,
@@ -29,7 +29,7 @@ from app.not_my_schemas import (
 )
 
 from app.services.service import Service
-from app.schemas.chat import ChatCompletions, Message
+from app.my_schemas.chat import ChatCompletions, Message
 from fastapi import HTTPException
 from openai import RateLimitError
 
